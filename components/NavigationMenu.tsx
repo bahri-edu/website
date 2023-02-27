@@ -1,6 +1,30 @@
-import React from "react";
+"use client";
+import React, { useEffect } from "react";
+
+declare global {
+  interface Window {
+    jQuery: any;
+    Meanmenu: any;
+  }
+}
 
 function NavigationMenu() {
+  useEffect(() => {
+    window.jQuery = require("../styles/js/jquery.min.js");
+    window.Meanmenu = require("../styles/js/jquery.meanmenu.js");
+
+    const meanmenu = window.jQuery(".mean-menu");
+    meanmenu.meanmenu({
+      meanScreenWidth: "991",
+    });
+    window.jQuery(window).on("scroll", function () {
+      if (window.jQuery(this).scrollTop() > 150) {
+        window.jQuery(".navbar-area").addClass("is-sticky");
+      } else {
+        window.jQuery(".navbar-area").removeClass("is-sticky");
+      }
+    });
+  }, []);
   return (
     <div className="navbar-area nav-bg-1">
       <div className="mobile-responsive-nav">

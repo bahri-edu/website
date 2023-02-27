@@ -1,7 +1,7 @@
 "use client";
 import React, { useEffect } from "react";
 import Script from "next/script";
-
+import "../styles/nivo-slider.css";
 declare global {
   interface Window {
     jQuery: any;
@@ -9,30 +9,28 @@ declare global {
   }
 }
 
-function Slider() {
-  window.jQuery = require("../styles/js/jquery.min.js");
-  window.NivoSlider = require("../styles/js/jquery.nivo.slider.js");
+export default function Slider() {
   useEffect(() => {
-    (function () {
-      let nivoSlider = window.jQuery("#nivoSlider");
+    window.jQuery = require("../styles/js/jquery.min.js");
+    window.NivoSlider = require("../styles/js/jquery.nivo.slider.js");
+    let nivo = window.jQuery("#nivoSlider");
 
-      if (nivoSlider.length) {
-        console.log(nivoSlider.nivoSlider);
-        nivoSlider.nivoSlider({
-          effect: "random",
-          slices: 15,
-          boxCols: 8,
-          boxRows: 4,
-          animSpeed: 600,
-          pauseTime: 5000000000,
-          startSlide: 0,
-          directionNav: true,
-          controlNavThumbs: false,
-          pauseOnHover: true,
-          manualAdvance: false,
-        });
-      }
-    })();
+    if (nivo.length) {
+      console.log(nivo);
+      nivo.nivoSlider({
+        effect: "random",
+        slices: 15,
+        boxCols: 8,
+        boxRows: 4,
+        animSpeed: 600,
+        pauseTime: 5000000000,
+        startSlide: 0,
+        directionNav: true,
+        controlNavThumbs: false,
+        pauseOnHover: true,
+        manualAdvance: false,
+      });
+    }
   }, []);
   return (
     <>
@@ -96,5 +94,3 @@ function Slider() {
     </>
   );
 }
-
-export default Slider;
