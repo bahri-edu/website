@@ -1,7 +1,7 @@
 import Script from "next/script";
 import React, { useEffect } from "react";
 
-import "../styles/odometer.min.css";
+import "../../styles/odometer.min.css";
 
 function FactsAndFigure() {
   return (

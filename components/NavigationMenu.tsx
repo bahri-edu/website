@@ -1,4 +1,7 @@
 "use client";
+import Link from "next/link";
+import { usePathname } from "next/navigation";
+import { type } from "os";
 import React, { useEffect } from "react";
 
 declare global {
@@ -9,6 +12,17 @@ declare global {
 }
 
 function NavigationMenu() {
+  const pathname = usePathname();
+
+  function isActive(startWith: string): boolean {
+    if (startWith === "/" && pathname == "/") return true;
+    if (pathname && pathname.startsWith(startWith) && startWith !== "/") {
+      return true;
+    }
+
+    return false;
+  }
+
   useEffect(() => {
     window.jQuery = require("../styles/js/jquery.min.js");
     window.Meanmenu = require("../styles/js/jquery.meanmenu.js");
@@ -35,7 +49,7 @@ function NavigationMenu() {
                 <img
                   src="/images/logo-bahri.jpg"
                   className="main-logo"
-                  lt="logo"
+                  alt="logo"
                   width="70"
                 />
               </a>
@@ -56,49 +70,57 @@ function NavigationMenu() {
             >
               <ul className="navbar-nav">
                 <li className="nav-item">
-                  <a href="#" className="nav-link active">
+                  <Link
+                    href="/"
+                    className={`nav-link ${isActive("/") && " active"}`}
+                  >
                     الرئيسية
-                  </a>
+                  </Link>
                 </li>
                 <li className="nav-item">
-                  <a href="#" className="nav-link dropdown-toggle">
+                  <a
+                    href="#"
+                    className={`nav-link dropdown-toggle   ${
+                      isActive("/about") && " active"
+                    }`}
+                  >
                     عن الجامعة
                   </a>
                   <ul className="dropdown-menu">
                     <li className="nav-item">
-                      <a href="#" className="nav-link">
+                      <Link href="/about/vision" className="nav-link">
                         الرؤية و الرسالة
-                      </a>
+                      </Link>
                     </li>
                     <li className="nav-item">
-                      <a href="#" className="nav-link">
+                      <Link href="/about/historical" className="nav-link">
                         الخلفية التاريخية
-                      </a>
+                      </Link>
                     </li>
                     <li className="nav-item">
-                      <a href="#" className="nav-link">
+                      <Link href="/about/facts" className="nav-link">
                         حقائق و أرقام
-                      </a>
+                      </Link>
                     </li>
                     <li className="nav-item">
-                      <a href="#" className="nav-link">
+                      <Link href="/about/logo" className="nav-link">
                         شعار الجامعة{" "}
-                      </a>
+                      </Link>
                     </li>
                     <li className="nav-item">
-                      <a href="#" className="nav-link">
+                      <Link href="/about/council" className="nav-link">
                         مجلس الجامعة
-                      </a>
+                      </Link>
                     </li>
                     <li className="nav-item">
-                      <a href="#" className="nav-link">
+                      <Link href="/about/logo" className="nav-link">
                         مجلس العمداء
-                      </a>
+                      </Link>
                     </li>
                     <li className="nav-item">
-                      <a href="#" className="nav-link">
+                      <Link href="/about/logo" className="nav-link">
                         مجلس الأساتذة
-                      </a>
+                      </Link>
                     </li>
                   </ul>
                 </li>
@@ -118,9 +140,12 @@ function NavigationMenu() {
                           </a>
                         </li>
                         <li className="nav-item">
-                          <a href="#" className="nav-link">
+                          <Link
+                            href="/managment/manager/message"
+                            className="nav-link"
+                          >
                             رسالة مدير الجامعة
-                          </a>
+                          </Link>
                         </li>
                         <li className="nav-item">
                           <a href="#" className="nav-link">

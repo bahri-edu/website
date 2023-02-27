@@ -7,11 +7,11 @@ declare global {
   }
 }
 
-import "../styles/aos.css";
+import "../../styles/aos.css";
 
 function AboutIntro() {
   useEffect(() => {
-    const AOS = (window.jQuery = require("../styles/js/aos.js"));
+    const AOS = (window.jQuery = require("../../styles/js/aos.js"));
     AOS.init({
       disable: function () {
         var maxWidth = 900;

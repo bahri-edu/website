@@ -1,7 +1,7 @@
 "use client";
 import React, { useEffect } from "react";
 import Script from "next/script";
-import "../styles/nivo-slider.css";
+import "@/styles/nivo-slider.css";
 declare global {
   interface Window {
     jQuery: any;
@@ -11,8 +11,8 @@ declare global {
 
 export default function Slider() {
   useEffect(() => {
-    window.jQuery = require("../styles/js/jquery.min.js");
-    window.NivoSlider = require("../styles/js/jquery.nivo.slider.js");
+    window.jQuery = require("@/styles/js/jquery.min.js");
+    window.NivoSlider = require("@/styles/js/jquery.nivo.slider.js");
     let nivo = window.jQuery("#nivoSlider");
 
     if (nivo.length) {

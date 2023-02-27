@@ -10,8 +10,8 @@ declare global {
 
 function NewsAndEvent() {
   useEffect(() => {
-    window.jQuery = require("../styles/js/jquery.min.js");
-    window.OwlCarousel = require("../styles/js/owl.carousel.min.js");
+    window.jQuery = require("@/styles/js/jquery.min.js");
+    window.OwlCarousel = require("@/styles/js/owl.carousel.min.js");
 
     window.jQuery(".events-slider").owlCarousel({
       loop: true,
