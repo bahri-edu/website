@@ -22,6 +22,13 @@ const DinamicSlider = dynamic(() => import("@/components/home/Slider"), {
 
 const inter = Inter({ subsets: ["latin"] });
 
+/**
+ * 
+ * Academics
+Academies
+Students
+ */
+
 export default function Home() {
   return (
     <main>

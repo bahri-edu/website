@@ -80,52 +80,72 @@ function NavigationMenu() {
                 <li className="nav-item">
                   <a
                     href="#"
-                    className={`nav-link dropdown-toggle   ${
-                      isActive("/about") && " active"
-                    }`}
+                    className={`nav-link dropdown-toggle   
+                    ${isActive("/about") && " active"}
+                    `}
                   >
                     عن الجامعة
                   </a>
                   <ul className="dropdown-menu">
                     <li className="nav-item">
-                      <Link href="/about/vision" className="nav-link">
+                      <Link
+                        href="/university/vision-and-mission"
+                        className="nav-link"
+                      >
                         الرؤية و الرسالة
                       </Link>
                     </li>
                     <li className="nav-item">
-                      <Link href="/about/historical" className="nav-link">
+                      <Link
+                        href="/university/historical-background"
+                        className="nav-link"
+                      >
                         الخلفية التاريخية
                       </Link>
                     </li>
                     <li className="nav-item">
-                      <Link href="/about/facts" className="nav-link">
+                      <Link
+                        href="/university/facts-and-figures"
+                        className="nav-link"
+                      >
                         حقائق و أرقام
                       </Link>
                     </li>
                     <li className="nav-item">
-                      <Link href="/about/logo" className="nav-link">
+                      <Link href="/university/logo" className="nav-link">
                         شعار الجامعة{" "}
                       </Link>
                     </li>
                     <li className="nav-item">
-                      <Link href="/about/council" className="nav-link">
+                      <Link
+                        href="/university/university-council"
+                        className="nav-link"
+                      >
                         مجلس الجامعة
                       </Link>
                     </li>
                     <li className="nav-item">
-                      <Link href="/about/logo" className="nav-link">
+                      <Link
+                        href="/university/the-deans-board"
+                        className="nav-link"
+                      >
                         مجلس العمداء
                       </Link>
                     </li>
                     <li className="nav-item">
-                      <Link href="/about/logo" className="nav-link">
+                      <Link href="/university/the-senate" className="nav-link">
                         مجلس الأساتذة
                       </Link>
                     </li>
                   </ul>
                 </li>
                 <li className="nav-item">
-                  <a href="#" className="nav-link dropdown-toggle">
+                  <a
+                    href="#"
+                    className={`nav-link dropdown-toggle
+                  ${isActive("/administration") && " active"}
+                  `}
+                  >
                     الإدارة
                   </a>
                   <ul className="dropdown-menu">
@@ -135,22 +155,28 @@ function NavigationMenu() {
                       </a>
                       <ul className="dropdown-menu tow">
                         <li className="nav-item">
-                          <a href="#" className="nav-link">
+                          <Link
+                            href="/administration/vice-chancellor/office"
+                            className="nav-link"
+                          >
                             مكتب مدير الجامعة
-                          </a>
+                          </Link>
                         </li>
                         <li className="nav-item">
                           <Link
-                            href="/managment/manager/message"
+                            href="/administration/vice-chancellor/message"
                             className="nav-link"
                           >
                             رسالة مدير الجامعة
                           </Link>
                         </li>
                         <li className="nav-item">
-                          <a href="#" className="nav-link">
+                          <Link
+                            href="/administration/vice-chancellor/cv"
+                            className="nav-link"
+                          >
                             السيرة الذاتية لمدير الجامعة
-                          </a>
+                          </Link>
                         </li>
                       </ul>
                     </li>
@@ -160,24 +186,36 @@ function NavigationMenu() {
                       </a>
                       <ul className="dropdown-menu tow">
                         <li className="nav-item">
-                          <a href="#" className="nav-link">
+                          <Link
+                            href="/administration/current-administration/vice-chancellor"
+                            className="nav-link"
+                          >
                             مدير الجامعة
-                          </a>
+                          </Link>
                         </li>
                         <li className="nav-item">
-                          <a href="#" className="nav-link">
+                          <Link
+                            href="/administration/current-administration/deputy-vice-chancellor"
+                            className="nav-link"
+                          >
                             نائب مدير الجامعة
-                          </a>
+                          </Link>
                         </li>
                         <li className="nav-item">
-                          <a href="#" className="nav-link">
+                          <Link
+                            href="/administration/current-administration/the-principal"
+                            className="nav-link"
+                          >
                             وكيل الجامعة
-                          </a>
+                          </Link>
                         </li>
                         <li className="nav-item">
-                          <a href="#" className="nav-link">
-                            السيرأمين الشؤون العلمية
-                          </a>
+                          <Link
+                            href="/administration/current-administration/secretary-of-scientific-affairs"
+                            className="nav-link"
+                          >
+                            أمين الشؤون العلمية
+                          </Link>
                         </li>
                       </ul>
                     </li>
@@ -188,80 +226,163 @@ function NavigationMenu() {
                       </a>
                       <ul className="dropdown-menu tow">
                         <li className="nav-item">
-                          <a href="#" className="nav-link">
+                          <Link
+                            href="/administration/university-administrations/academic-affairs"
+                            className="nav-link"
+                          >
                             أمانة الشؤون العلمية
-                          </a>
+                          </Link>
                         </li>
                         <li className="nav-item">
-                          <a href="#" className="nav-link">
+                          <Link
+                            href="/administration/university-administrations/principle-office"
+                            className="nav-link"
+                          >
                             مكتب وكيل الجامعة
-                          </a>
+                          </Link>
                         </li>
                         <li className="nav-item">
-                          <a href="#" className="nav-link">
+                          <Link
+                            href="/administration/university-administrations/human-resources"
+                            className="nav-link"
+                          >
                             إدارة الموارد البشرية
-                          </a>
+                          </Link>
+                        </li>
+
+                        <li className="nav-item">
+                          <Link
+                            href="/administration/university-administrations/cultural-relations-and-information"
+                            className="nav-link"
+                          >
+                            إدارة العلاقات الثقافية
+                          </Link>
                         </li>
                         <li className="nav-item">
-                          <a href="#" className="nav-link">
+                          <Link
+                            href="/administration/university-administrations/financial-controller-office"
+                            className="nav-link"
+                          >
                             الإدارة المالية
-                          </a>
+                          </Link>
+                        </li>
+                        <li className="nav-item">
+                          <Link
+                            href="/administration/university-administrations/investment-directorate"
+                            className="nav-link"
+                          >
+                            إدارة الإستثمار
+                          </Link>
+                        </li>
+                        <li className="nav-item">
+                          <Link
+                            href="/administration/university-administrations/quality-management-and-development"
+                            className="nav-link"
+                          >
+                            إدارة الجودة و التطوير
+                          </Link>
+                        </li>
+                        <li className="nav-item">
+                          <Link
+                            href="/administration/university-administrations/services-management"
+                            className="nav-link"
+                          >
+                            إدارة الخدمات
+                          </Link>
+                        </li>
+                        <li className="nav-item">
+                          <Link
+                            href="/administration/university-administrations/medical-and-health-services-unit"
+                            className="nav-link"
+                          >
+                            وحدة الخدمات الطبية و الصحية
+                          </Link>
+                        </li>
+                        <li className="nav-item">
+                          <Link
+                            href="/administration/university-administrations/university-police"
+                            className="nav-link"
+                          >
+                            إدارة الحرس الجامعي
+                          </Link>
                         </li>
                       </ul>
                     </li>
                   </ul>
                 </li>
                 <li className="nav-item">
-                  <a href="#" className="nav-link dropdown-toggle">
+                  <a
+                    href="#"
+                    className={`nav-link dropdown-toggle
+                  ${isActive("/admission") && " active"}
+                  `}
+                  >
                     القبول
                   </a>
                   <ul className="dropdown-menu">
                     <li className="nav-item">
-                      <a href="#" className="nav-link">
+                      <Link href="/admission/overview" className="nav-link">
                         نظرة عامة
-                      </a>
+                      </Link>
                     </li>
                     <li className="nav-item">
-                      <a href="#" className="nav-link">
+                      <Link
+                        href="/admission/postgraduate-programs"
+                        className="nav-link"
+                      >
                         برنامج الدراسات العليا
-                      </a>
+                      </Link>
                     </li>
                     <li className="nav-item">
-                      <a href="#" className="nav-link">
+                      <Link
+                        href="/admission/higher-diploma-programme"
+                        className="nav-link"
+                      >
                         برنامج الدبلوم العالي
-                      </a>
+                      </Link>
                     </li>
                     <li className="nav-item">
-                      <a href="#" className="nav-link">
+                      <Link
+                        href="/admission/university-studies-programs"
+                        className="nav-link"
+                      >
                         برنامج البكالريوس{" "}
-                      </a>
+                      </Link>
                     </li>
                     <li className="nav-item">
-                      <a href="#" className="nav-link">
+                      <Link
+                        href="/admission/university-diploma-programs"
+                        className="nav-link"
+                      >
                         برنامج الدبلوم الجامعي
-                      </a>
+                      </Link>
                     </li>
                   </ul>
                 </li>
                 <li className="nav-item">
-                  <a href="#" className="nav-link dropdown-toggle">
+                  <a
+                    href="#"
+                    className={`nav-link dropdown-toggle
+                  ${isActive("/academics") && " active"}
+                  `}
+                  >
                     الأكاديمية
                   </a>
                   <ul className="dropdown-menu">
                     <li className="nav-item">
-                      <a href="#" className="nav-link">
+                      <Link href="/academics/regulations" className="nav-link">
                         اللوائح
-                      </a>
+                      </Link>
                     </li>
                     <li className="nav-item">
-                      <a href="#" className="nav-link">
+                      <Link href="/academics/calendar" className="nav-link">
                         التقويم الدراسي
-                      </a>
+                      </Link>
                     </li>
                     <li className="nav-item">
-                      <a href="#" className="nav-link">
+                      <Link href="/academics/students" className="nav-link">
                         الطلاب
-                      </a>
+                      </Link>
                     </li>
                   </ul>
                 </li>
@@ -392,24 +513,33 @@ function NavigationMenu() {
                   </a>
                   <ul className="dropdown-menu">
                     <li className="nav-item">
-                      <a href="#" className="nav-link">
+                      <Link
+                        href="/centres/human-resource-development-and-continual-education"
+                        className="nav-link"
+                      >
                         تنمية الموارد البشرية و التعليم المستمر
-                      </a>
+                      </Link>
                     </li>
                     <li className="nav-item">
-                      <a href="#" className="nav-link">
+                      <Link
+                        href="/centres/peace-and-development"
+                        className="nav-link"
+                      >
                         السلام والتنمية
-                      </a>
+                      </Link>
                     </li>
                     <li className="nav-item">
-                      <a href="#" className="nav-link">
+                      <Link
+                        href="/centres/language-and-translation"
+                        className="nav-link"
+                      >
                         اللغات والترجمة
-                      </a>
+                      </Link>
                     </li>
                     <li className="nav-item">
-                      <a href="#" className="nav-link">
+                      <Link href="/centres/one-health" className="nav-link">
                         الصحة الواحده
-                      </a>
+                      </Link>
                     </li>
                   </ul>
                 </li>
@@ -419,32 +549,44 @@ function NavigationMenu() {
                   </a>
                   <ul className="dropdown-menu">
                     <li className="nav-item">
-                      <a href="#" className="nav-link">
+                      <Link
+                        href="/students/cs-and-math-student-elearning-form-reg"
+                        className="nav-link"
+                      >
                         كلية علوم الحاسوب و الرياضيات نموذج التسجيل للتعليم
                         الالكتروني
-                      </a>
+                      </Link>
                     </li>
                     <li className="nav-item">
-                      <a href="#" className="nav-link">
+                      <Link
+                        href="/students/registration-of-students-of-the-college-of-engineering-and-architecture-for-e-learning"
+                        className="nav-link"
+                      >
                         تسجيل طلاب كلية الهندسة و العمارة للتعليم الالكتروني
-                      </a>
+                      </Link>
                     </li>
                     <li className="nav-item">
-                      <a href="#" className="nav-link">
+                      <Link
+                        href="/students/colleges-time-tables"
+                        className="nav-link"
+                      >
                         جداول الامتحانات
-                      </a>
+                      </Link>
                     </li>
                     <li className="nav-item">
-                      <a href="#" className="nav-link">
+                      <Link
+                        href="/students/examinations-tables"
+                        className="nav-link"
+                      >
                         النتيجة
-                      </a>
+                      </Link>
                     </li>
                   </ul>
                 </li>
                 <li className="nav-item">
-                  <a href="#" className="nav-link">
+                  <Link href="/news" className="nav-link">
                     الأخبار
-                  </a>
+                  </Link>
                 </li>
               </ul>
               <div className="others-options">

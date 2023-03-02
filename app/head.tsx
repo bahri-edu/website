@@ -1,5 +1,15 @@
 import Script from "next/script";
 
+/**
+ * 
+ *
+ * Students
+  CS & Math Student Elearning Form Reg
+  Registration of students of the College of Engineering and Architecture for e-learning
+  Colleges Time Tables
+  Examinations Tables
+ */
+
 export default function Head() {
   return (
     <>
