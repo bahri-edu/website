@@ -1,4 +1,5 @@
 "use client";
+import { httpClient } from "@/utils/util.http";
 import React, { useEffect } from "react";
 
 declare global {
@@ -8,6 +9,10 @@ declare global {
 }
 
 import "../../styles/aos.css";
+
+async function geImportantNews() {
+  return httpClient("news?limit=3");
+}
 
 function AboutIntro() {
   useEffect(() => {

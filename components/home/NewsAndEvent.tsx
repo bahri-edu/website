@@ -1,5 +1,6 @@
 "use client";
-import React, { useEffect } from "react";
+import { httpClient } from "@/utils/util.http";
+import React, { useEffect, useState } from "react";
 
 declare global {
   interface Window {
@@ -8,7 +9,9 @@ declare global {
   }
 }
 
-function NewsAndEvent() {
+async function NewsAndEvent() {
+  // const [news, setNews] = useState([]);
+
   useEffect(() => {
     window.jQuery = require("@/styles/js/jquery.min.js");
     window.OwlCarousel = require("@/styles/js/owl.carousel.min.js");
@@ -41,6 +44,12 @@ function NewsAndEvent() {
         },
       },
     });
+
+    // (async function () {
+    //   const ns = await httpClient("news?type=GENERAL");
+
+    //   setNews(ns);
+    // })();
   }, []);
 
   return (

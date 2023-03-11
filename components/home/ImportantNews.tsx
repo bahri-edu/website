@@ -1,6 +1,12 @@
+import { httpClient } from "@/utils/util.http";
 import React from "react";
 
-function ImportantNews() {
+async function geImportantNews() {
+  return httpClient("news?limit=3&type=ACADEMIC");
+}
+
+async function ImportantNews() {
+  const [one, tow, three] = await geImportantNews();
   return (
     <div className="lates-news-area pt-100 pb-70">
       <div className="container">
@@ -30,16 +36,14 @@ function ImportantNews() {
                     <div className="list">
                       <ul>
                         <li>
-                          <i className="flaticon-time"></i>10 يناير 2023
+                          <i className="flaticon-time"></i>
+                          {new Date(tow?.createdAt)?.toLocaleDateString()}
                         </li>
                       </ul>
                     </div>
                     <a href="#">
-                      <h3>التسجيل الإكتروني للطلاب القدامى</h3>
-                      <p>
-                        تعلن كلية العلوم الإدارية عن نتائج امتحانات الدور الأول
-                        للمستويات (الثاني - الثالث الرابع)
-                      </p>
+                      <h3>{tow?.titleAr} </h3>
+                      <p>{tow?.descriptionAr}</p>
                     </a>
                     <a href="#" className="default-btn btn">
                       إقرأ المزيد<i className="flaticon-next"></i>
@@ -68,16 +72,14 @@ function ImportantNews() {
                     <div className="list">
                       <ul>
                         <li>
-                          <i className="flaticon-time"></i>13 يناير 2023
+                          <i className="flaticon-time"></i>
+                          {new Date(tow?.createdAt)?.toLocaleDateString()}
                         </li>
                       </ul>
                     </div>
                     <a href="#">
-                      <h3>التسجيل الإكتروني للطلاب القدامى</h3>
-                      <p>
-                        تعلن كلية العلوم الإدارية عن نتائج امتحانات الدور الأول
-                        للمستويات (الثاني - الثالث الرابع)
-                      </p>
+                      <h3>{one?.titleAr}</h3>
+                      <p>{one?.descriptionAr}</p>
                     </a>
                     <a href="#" className="default-btn btn">
                       إقرأ المزيد<i className="flaticon-next"></i>
@@ -104,16 +106,14 @@ function ImportantNews() {
                 <div className="list">
                   <ul>
                     <li>
-                      <i className="flaticon-time"></i>16 يناير 2023
+                      <i className="flaticon-time"></i>
+                      {new Date(tow?.createdAt)?.toLocaleDateString()}
                     </li>
                   </ul>
                 </div>
                 <a href="#">
-                  <h3>التسجيل الإكتروني للطلاب القدامى</h3>
-                  <p>
-                    تعلن كلية العلوم الإدارية عن نتائج امتحانات الدور الأول
-                    للمستويات (الثاني - الثالث الرابع) على الروابط التالية:..
-                  </p>
+                  <h3>{three?.titleAr} </h3>
+                  <p>{three?.descriptionAr}</p>
                 </a>
                 <a href="#" className="default-btn btn">
                   إقرأ المزيد<i className="flaticon-next"></i>
