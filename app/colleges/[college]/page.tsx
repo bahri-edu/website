@@ -1,7 +1,12 @@
+import CollegeComponent from "@/components/CollegeComponent";
 import React from "react";
 
-function College() {
-  return <div>page</div>;
+function College({ params }: any) {
+  return (
+    <>
+      <CollegeComponent />
+    </>
+  );
 }
 
 export default College;

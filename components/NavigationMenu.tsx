@@ -81,7 +81,7 @@ function NavigationMenu() {
                   <a
                     href="#"
                     className={`nav-link dropdown-toggle   
-                    ${isActive("/about") && " active"}
+                    ${isActive("/university") && " active"}
                     `}
                   >
                     عن الجامعة
@@ -387,7 +387,12 @@ function NavigationMenu() {
                   </ul>
                 </li>
                 <li className="nav-item mega-item">
-                  <a href="#" className="nav-link dropdown-toggle">
+                  <a
+                    href="#"
+                    className={`nav-link dropdown-toggle
+                  ${isActive("/collegescls") && " active"}
+                  `}
+                  >
                     الكليات
                   </a>
                   <ul className="dropdown-menu mega">
@@ -395,9 +400,9 @@ function NavigationMenu() {
                       <div className="single-magemenu">
                         <ul>
                           <li className="nav-item">
-                            <a href="#" className="nav-link">
+                            <Link href="/colleges/animal" className="nav-link">
                               الإنتاج الحيواني
-                            </a>
+                            </Link>
                           </li>
                           <li className="nav-item">
                             <a href="#" className="nav-link">
