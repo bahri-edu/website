@@ -1,12 +1,9 @@
-import { httpClient } from "@/utils/util.http";
+import { News } from "@/types/models";
+import { httpClient, uploadFileUrl } from "@/utils/util.http";
 import React from "react";
 
-async function geImportantNews() {
-  return httpClient("news?limit=3&type=ACADEMIC");
-}
-
-async function ImportantNews() {
-  const [one, tow, three] = await geImportantNews();
+function ImportantNews({ news }: { news: News[] }) {
+  const [one, tow, three] = news;
   return (
     <div className="lates-news-area pt-100 pb-70">
       <div className="container">
@@ -27,7 +24,11 @@ async function ImportantNews() {
                 <div className="col-lg-5 col-md-5">
                   <div className="news-img">
                     <a href="#">
-                      <img src="/images/bah1.jpg" alt="Image" />
+                      {one?.images && one?.images.length > 0 ? (
+                        <img src={uploadFileUrl + one?.images[0]} alt="Image" />
+                      ) : (
+                        <img src="/images/bahri-gate_-1-1.jpg" alt="Image" />
+                      )}
                     </a>
                   </div>
                 </div>
@@ -37,13 +38,13 @@ async function ImportantNews() {
                       <ul>
                         <li>
                           <i className="flaticon-time"></i>
-                          {new Date(tow?.createdAt)?.toLocaleDateString()}
+                          {new Date(one.createdAt)?.toLocaleDateString()}
                         </li>
                       </ul>
                     </div>
                     <a href="#">
-                      <h3>{tow?.titleAr} </h3>
-                      <p>{tow?.descriptionAr}</p>
+                      <h3>{one?.titleAr} </h3>
+                      <p>{one?.descriptionAr}</p>
                     </a>
                     <a href="#" className="default-btn btn">
                       إقرأ المزيد<i className="flaticon-next"></i>
@@ -63,7 +64,11 @@ async function ImportantNews() {
                 <div className="col-lg-5 col-md-5">
                   <div className="news-img">
                     <a href="#">
-                      <img src="/images/bahri-gate_-1-1.jpg" alt="Image" />
+                      {tow?.images && tow?.images.length > 0 ? (
+                        <img src={uploadFileUrl + tow?.images[0]} alt="Image" />
+                      ) : (
+                        <img src="/images/bahri-gate_-1-1.jpg" alt="Image" />
+                      )}
                     </a>
                   </div>
                 </div>
@@ -99,7 +104,11 @@ async function ImportantNews() {
             <div className="single-news-card style2">
               <div className="news-img" style={{ height: "300px" }}>
                 <a href="#">
-                  <img src="/images/bahri-gate_-1-1.jpg" alt="Image" />
+                  {three?.images && three?.images.length > 0 ? (
+                    <img src={uploadFileUrl + three?.images[0]} alt="Image" />
+                  ) : (
+                    <img src="/images/bahri-gate_-1-1.jpg" alt="Image" />
+                  )}
                 </a>
               </div>
               <div className="news-content">
@@ -107,7 +116,7 @@ async function ImportantNews() {
                   <ul>
                     <li>
                       <i className="flaticon-time"></i>
-                      {new Date(tow?.createdAt)?.toLocaleDateString()}
+                      {new Date(three?.createdAt)?.toLocaleDateString()}
                     </li>
                   </ul>
                 </div>

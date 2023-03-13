@@ -1,15 +1,11 @@
+import { FactAndFigure } from "@/types/models";
 import { httpClient } from "@/utils/util.http";
 import Script from "next/script";
 import React, { useEffect } from "react";
 
 import "../../styles/odometer.min.css";
 
-async function getFactAndFigures() {
-  return httpClient("fact-and-figure");
-}
-
-async function FactsAndFigure() {
-  const items = await getFactAndFigures();
+function FactsAndFigure({ facts }: { facts: FactAndFigure[] }) {
   return (
     <>
       <Script src="../styles/js/odometer.min.js" />
@@ -24,7 +20,7 @@ async function FactsAndFigure() {
           </div>
           <div className="counter-area">
             <div className="row">
-              {items?.map((item: any) => (
+              {facts?.map((item: any) => (
                 <div key={item?.id} className="col-xl col-md-6">
                   <div className="counter-card">
                     <h1>

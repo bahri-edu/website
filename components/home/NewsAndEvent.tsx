@@ -1,55 +1,47 @@
 "use client";
-import { httpClient } from "@/utils/util.http";
+import { httpClient, uploadFileUrl } from "@/utils/util.http";
 import React, { useEffect, useState } from "react";
 
-declare global {
-  interface Window {
-    jQuery: any;
-    OwlCarousel: any;
-  }
-}
+// Import Swiper React components
+import { Swiper, SwiperSlide } from "swiper/react";
+import { Navigation, Pagination, Scrollbar, A11y } from "swiper";
 
-async function NewsAndEvent() {
-  // const [news, setNews] = useState([]);
+// Import Swiper styles
+import "swiper/css";
+import "swiper/css/navigation";
+import "@/styles/moduls/swiper.modul.css";
+import { News } from "@/types/models";
+
+// declare global {
+//   interface Window {
+//     jQuery: any;
+//     OwlCarousel: any;
+//   }
+// }
+
+const monthNames = [
+  "January",
+  "February",
+  "March",
+  "April",
+  "May",
+  "June",
+  "July",
+  "August",
+  "September",
+  "October",
+  "November",
+  "December",
+];
+
+function NewsAndEvent() {
+  const [news, setNews] = useState<News[]>([]);
 
   useEffect(() => {
-    window.jQuery = require("@/styles/js/jquery.min.js");
-    window.OwlCarousel = require("@/styles/js/owl.carousel.min.js");
-
-    window.jQuery(".events-slider").owlCarousel({
-      loop: true,
-      margin: 30,
-      nav: true,
-      dots: true,
-      thumbs: false,
-      autoplay: false,
-      smartSpeed: 1000,
-      autoplayHoverPause: true,
-      navText: [
-        '<i class="ri-arrow-left-line"></i>',
-        '<i class="ri-arrow-right-line"></i>',
-      ],
-      responsive: {
-        0: {
-          items: 1,
-        },
-        768: {
-          items: 2,
-        },
-        992: {
-          items: 3,
-        },
-        1200: {
-          items: 3,
-        },
-      },
-    });
-
-    // (async function () {
-    //   const ns = await httpClient("news?type=GENERAL");
-
-    //   setNews(ns);
-    // })();
+    (async function () {
+      const ns = await httpClient("news?type=GENERAL");
+      setNews(ns);
+    })();
   }, []);
 
   return (
@@ -59,87 +51,52 @@ async function NewsAndEvent() {
           <h2>أخر الأخبار و الفعاليات</h2>
           <p>أهم و أحدث الأخبار و الفعاليات</p>
         </div>
-        <div className="events-slider mb-20 owl-carousel owl-theme">
-          <div className="single-events-card">
-            <div className="events-image">
-              <a href="#">
-                <img src="/images/bahri-gate_-1-1.jpg" alt="Image" />
-              </a>
-              <div className="date">
-                <span>28</span>
-                <p>مارس</p>
-              </div>
-            </div>
-            <div className="events-content">
-              <a href="#">
-                <h3>مدير الجامعة يزور الصندوق القومي لرعاية الطلاب.</h3>
-              </a>
-            </div>
-          </div>
-          <div className="single-events-card">
-            <div className="events-image">
-              <a href="#">
-                <img src="/images/bah1.jpg" alt="Image" />
-              </a>
-              <div className="date">
-                <span>30</span>
-                <p>يوليو</p>
-              </div>
-            </div>
-            <div className="events-content">
-              <a href="#">
-                <h3>عميد كلية القانون يشارك في افتتاح الدورة الثانية.</h3>
-              </a>
-            </div>
-          </div>
-          <div className="single-events-card">
-            <div className="events-image">
-              <a href="#">
-                <img src="/images/bah4.png" alt="Image" />
-              </a>
-              <div className="date">
-                <span>30</span>
-                <p>يوليو</p>
-              </div>
-            </div>
-            <div className="events-content">
-              <a href="#">
-                <h3>هذا النص بديل لنص أخر سيتم تغييره بالمحتوى الأصلي.</h3>
-              </a>
-            </div>
-          </div>
-          <div className="single-events-card">
-            <div className="events-image">
-              <a href="#">
-                <img src="/images/bahri-gate_-1-1.jpg" alt="Image" />
-              </a>
-              <div className="date">
-                <span>30</span>
-                <p>يوليو</p>
-              </div>
-            </div>
-            <div className="events-content">
-              <a href="#">
-                <h3>عميد كلية القانون يشارك في افتتاح الدورة الثانية.</h3>
-              </a>
-            </div>
-          </div>
-          <div className="single-events-card">
-            <div className="events-image">
-              <a href="#">
-                <img src="/images/bah1.jpg" alt="Image" />
-              </a>
-              <div className="date">
-                <span>30</span>
-                <p>يوليو</p>
-              </div>
-            </div>
-            <div className="events-content">
-              <a href="#">
-                <h3>مدير الجامعة يزور الصندوق القومي لرعاية الطلاب.</h3>
-              </a>
-            </div>
-          </div>
+
+        <div className=" mb-20 owl-theme">
+          <Swiper
+            modules={[Navigation, Pagination, Scrollbar, A11y]}
+            spaceBetween={10}
+            navigation
+            breakpoints={{
+              640: {
+                width: 640,
+                slidesPerView: 1,
+              },
+              768: {
+                width: 768,
+                slidesPerView: 2,
+              },
+            }}
+            pagination={{ clickable: true }}
+            scrollbar={{ draggable: true }}
+            onSlideChange={() => console.log("slide change")}
+            onSwiper={(swiper) => console.log(swiper)}
+          >
+            {news.map((n: any) => (
+              <SwiperSlide key={n.id}>
+                <div className="single-events-card">
+                  <div className="events-image">
+                    <a href="#">
+                      {n?.images && n?.images.length > 0 ? (
+                        <img src={uploadFileUrl + n?.images[0]} alt="Image" />
+                      ) : (
+                        <img src="/images/bahri-gate_-1-1.jpg" alt="Image" />
+                      )}
+                    </a>
+                    <div className="date">
+                      <span>{new Date(n.createdAt).getDate()}</span>
+                      <p>{monthNames[new Date(n.createdAt).getMonth()]}</p>
+                    </div>
+                  </div>
+                  <div className="events-content">
+                    <a href="#">
+                      <h3>{n?.titleAr}</h3>
+                    </a>
+                  </div>
+                </div>
+              </SwiperSlide>
+            ))}
+          </Swiper>
         </div>
       </div>
     </div>

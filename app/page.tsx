@@ -14,6 +14,7 @@ import "../styles/animate.css";
 
 import "../styles/responsive.css";
 import Script from "next/script";
+import { httpClient } from "@/utils/util.http";
 
 const DinamicSlider = dynamic(() => import("@/components/home/Slider"), {
   loading: () => <p>...</p>,
@@ -29,7 +30,17 @@ Academies
 Students
  */
 
-export default function Home() {
+async function getData() {
+  return Promise.all([
+    httpClient("news?limit=3&type=ACADEMIC"),
+    httpClient("electronic-service"),
+    httpClient("fact-and-figure"),
+  ]);
+}
+
+export default async function Home() {
+  const [news, services, facts] = await getData();
+
   return (
     <main>
       <Script
@@ -39,13 +50,13 @@ export default function Home() {
       />
       <DinamicSlider />
 
-      <ImportantNews />
+      <ImportantNews news={news} />
 
       <AboutIntro />
 
-      <ElServices />
+      <ElServices services={services} />
 
-      <FactsAndFigure />
+      <FactsAndFigure facts={facts} />
 
       <NewsAndEvent />
     </main>

@@ -1,4 +1,5 @@
-const baseUrl = "http://localhost:4000/api/";
+const baseUrl = "https://website-api-le8m.onrender.com/api/";
+export const uploadFileUrl = "https://upload-service.onrender.com/";
 
 export interface HttpRequestOptions {
   method?: string;

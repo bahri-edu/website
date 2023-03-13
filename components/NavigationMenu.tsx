@@ -1,7 +1,7 @@
 "use client";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { type } from "os";
+
 import React, { useEffect } from "react";
 
 declare global {
@@ -31,13 +31,13 @@ function NavigationMenu() {
     meanmenu.meanmenu({
       meanScreenWidth: "991",
     });
-    window.jQuery(window).on("scroll", function () {
-      if (window.jQuery(this).scrollTop() > 150) {
-        window.jQuery(".navbar-area").addClass("is-sticky");
-      } else {
-        window.jQuery(".navbar-area").removeClass("is-sticky");
-      }
-    });
+    // window.jQuery(window).on("scroll", function () {
+    //   if (window.jQuery(this).scrollTop() > 150) {
+    //     window.jQuery(".navbar-area").addClass("is-sticky");
+    //   } else {
+    //     window.jQuery(".navbar-area").removeClass("is-sticky");
+    //   }
+    // });
   }, []);
   return (
     <div className="navbar-area nav-bg-1">

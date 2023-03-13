@@ -1,13 +1,8 @@
+import { EService } from "@/types/models";
 import { httpClient } from "@/utils/util.http";
 import React from "react";
 
-async function getElServicess() {
-  return httpClient("electronic-service");
-}
-
-async function ElServices() {
-  const services = await getElServicess();
-
+function ElServices({ services }: { services: EService[] }) {
   return (
     <div className="campus-safety-area pt-100 pb-70">
       <div className="container">
