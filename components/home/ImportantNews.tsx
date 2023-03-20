@@ -10,6 +10,8 @@ function ImportantNews() {
 
   const { locale } = useRouter();
 
+  const lng = locale == "ar" ? "ar" : "en";
+
   const t = useTranslate(translate, locale);
 
   useEffect(() => {
@@ -59,8 +61,8 @@ function ImportantNews() {
                       </ul>
                     </div>
                     <a href="#">
-                      <h3>{one?.titleAr} </h3>
-                      <p>{one?.descriptionAr}</p>
+                      <h3>{one?.title[lng]} </h3>
+                      <p>{one?.description[lng]?.slice(0, 150)}</p>
                     </a>
                     <a href="#" className="default-btn btn">
                       {t("readMore")}
@@ -101,8 +103,8 @@ function ImportantNews() {
                       </ul>
                     </div>
                     <a href="#">
-                      <h3>{one?.titleAr}</h3>
-                      <p>{one?.descriptionAr}</p>
+                      <h3>{tow?.title[lng]}</h3>
+                      <p>{tow?.description[lng].slice(0, 150)}</p>
                     </a>
                     <a href="#" className="default-btn btn">
                       {t("readMore")}
@@ -141,8 +143,8 @@ function ImportantNews() {
                   </ul>
                 </div>
                 <a href="#">
-                  <h3>{three?.titleAr} </h3>
-                  <p>{three?.descriptionAr}</p>
+                  <h3>{three?.title[lng]} </h3>
+                  <p>{three?.description[lng].slice(0, 280)}</p>
                 </a>
                 <a href="#" className="default-btn btn">
                   {t("readMore")}

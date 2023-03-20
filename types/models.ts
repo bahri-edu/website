@@ -1,9 +1,7 @@
 export interface News {
   id: string;
-  titleAr: string;
-  titleEn: string;
-  descriptionAr: string;
-  descriptionEn: string;
+  title: Translate;
+  description: Translate;
   type: NewsTypeEnum;
   images?: string[];
   createdAt: any;
@@ -11,8 +9,7 @@ export interface News {
 
 export interface EService {
   id: string;
-  titleAr: string;
-  titleEn: string;
+  title: Translate;
   icon: string;
   seqNo: number;
 }
@@ -20,9 +17,32 @@ export interface EService {
 export interface FactAndFigure {
   id: string;
   count: number;
-  descriptionAr: string;
-  descriptionEn: string;
+  description: Translate;
   type: FactType;
+}
+
+interface Social {
+  icon: string;
+  url: string;
+}
+
+export interface Contact {
+  location: Translate;
+  phone: string[];
+  email: string;
+  fax: string;
+  socials: Social[];
+}
+
+export interface RelatedSite {
+  text: Translate;
+  url: string;
+  seqNo: number;
+}
+
+export interface Translate {
+  en: string;
+  ar: string;
 }
 
 export interface UpdateFactAndFigure {

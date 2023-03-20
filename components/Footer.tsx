@@ -1,11 +1,30 @@
+import { Contact, RelatedSite } from "@/types/models";
 import { ITranslate, useTranslate } from "@/utils/translate.util";
+import { httpClient } from "@/utils/util.http";
 import { useRouter } from "next/router";
-import React from "react";
+import React, { useEffect, useState } from "react";
+
+async function fetchFooterData() {
+  return await Promise.all([httpClient("contact"), httpClient("related-site")]);
+}
 
 function Footer() {
   const { locale } = useRouter();
 
+  const [contact, setContact] = useState<Contact[]>([]);
+  const [related, setRelated] = useState<RelatedSite[]>([]);
+
   const t = useTranslate(translate, locale);
+
+  const lng = locale == "ar" ? "ar" : "en";
+
+  useEffect(() => {
+    (async function () {
+      const [contact, related] = await fetchFooterData();
+      setContact(contact);
+      setRelated(related);
+    })();
+  }, []);
   return (
     <div className="footer-area pt-70 pb-50">
       <div className="container">
@@ -28,18 +47,21 @@ function Footer() {
                 <ul>
                   <li>
                     <i className="ri-map-2-line"></i>
-                    السودان - الخرطوم
+                    {contact[0]?.location[lng]}
                   </li>
-                  <li className="none">
-                    <i className="ri-phone-line"></i>
-                    <a href="tel:">
-                      <span>5674 8765 249+</span>
-                    </a>
-                  </li>
+                  {contact[0]?.phone?.map((p) => (
+                    <li key={p} className="none">
+                      <i className="ri-phone-line"></i>
+
+                      <a href="tel:">
+                        <span> {p}</span>
+                      </a>
+                    </li>
+                  ))}
                   <li className="none">
                     <i className="ri-mail-line"></i>
                     <a href="#">
-                      <span className="__cf_email__">bahri-un@mail.com</span>
+                      <span className="__cf_email__"> {contact[0]?.email}</span>
                     </a>
                   </li>
                 </ul>
@@ -72,18 +94,11 @@ function Footer() {
               <h3>{t("relatedSite")}</h3>
               <div className="list">
                 <ul>
-                  <li>
-                    <a href="#">إتحاد الجامعات السودانية</a>
-                  </li>
-                  <li>
-                    <a href="#">وزارة التعليم العالي</a>
-                  </li>
-                  <li>
-                    <a href="#">البحث العلمي</a>
-                  </li>
-                  <li>
-                    <a href="#">المجلس السوداني</a>
-                  </li>
+                  {related.map((r) => (
+                    <li key={r.url}>
+                      <a href={r.url}>{r.text?.[lng]}</a>
+                    </li>
+                  ))}
                 </ul>
               </div>
             </div>
@@ -95,6 +110,17 @@ function Footer() {
       </div>
     </div>
   );
+}
+
+export async function getStaticProps() {
+  const contact = await httpClient("contact");
+
+  return {
+    props: {
+      contact,
+    },
+    revalidate: 10,
+  };
 }
 
 export default Footer;

@@ -39,6 +39,8 @@ function NewsAndEvent() {
 
   const { locale } = useRouter();
 
+  const lng = locale == "ar" ? "ar" : "en";
+
   const t = useTranslate(translate, locale);
 
   useEffect(() => {
@@ -94,7 +96,7 @@ function NewsAndEvent() {
                   </div>
                   <div className="events-content">
                     <a href="#">
-                      <h3>{n?.titleAr}</h3>
+                      <h3>{n?.title[lng]}</h3>
                     </a>
                   </div>
                 </div>

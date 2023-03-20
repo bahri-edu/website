@@ -11,6 +11,8 @@ function ElServices() {
 
   const t = useTranslate(translate, locale);
 
+  const lng = locale == "ar" ? "ar" : "en";
+
   useEffect(() => {
     (async () => {
       const srvs = await httpClient("electronic-service");
@@ -32,7 +34,7 @@ function ElServices() {
                   <i className={service?.icon}></i>
                 </div>
                 <a href="#">
-                  <h3>{service?.titleAr}</h3>
+                  <h3>{service?.title[lng]}</h3>
                 </a>
                 <a href="#" className="read-more-btn">
                   {t("readMore")} <i className="flaticon-next"></i>
