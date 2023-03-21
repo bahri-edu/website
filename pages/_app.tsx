@@ -3,6 +3,7 @@ import type { AppProps } from "next/app";
 import "../styles/globals.css";
 import "../styles/flaticon.css";
 import "../styles/remixicon.css";
+import "../styles/animate.css";
 import "../styles/aos.css";
 import "../styles/moduls/Slider.module.css";
 import "swiper/css";

@@ -1,5 +1,6 @@
+import { ITranslate, useTranslate } from "@/utils/translate.util";
+import { useRouter } from "next/router";
 import React, { useEffect } from "react";
-import Script from "next/script";
 
 declare global {
   interface Window {
@@ -9,6 +10,12 @@ declare global {
 }
 
 export default function Slider() {
+  const { locale } = useRouter();
+
+  const t = useTranslate(translate, locale);
+
+  const lng = locale == "ar" ? "ar" : "en";
+
   useEffect(() => {
     window.jQuery = require("@/styles/js/jquery.min.js");
     window.NivoSlider = require("@/styles/js/jquery.nivo.slider.js");
@@ -44,18 +51,14 @@ export default function Slider() {
             <div className="container">
               <div className="content-part one">
                 <div className="slider-des">
-                  <h1 className="sl-title white-color">
-                    إبدا مشوارك التعليمي هنا
-                  </h1>
-                  <div className="sl-desc">
-                    هذا النص بديل لنص آخر سيتم تعديلة بالمحتوى الأصلي هذا
-                    للتجريب شكل المحتوى فقط.
-                  </div>
+                  <h1 className="sl-title white-color">{t("start")}</h1>
+                  <div className="sl-desc">{t("desc")}</div>
                   <div className="slider-bottom">
                     <ul>
                       <li>
                         <a href="#" className="default-btn btn">
-                          الكليات<i className="flaticon-next"></i>
+                          {t("colleges")}
+                          <i className="flaticon-next"></i>
                         </a>
                       </li>
                     </ul>
@@ -70,16 +73,14 @@ export default function Slider() {
             <div className="container">
               <div className="content-part">
                 <div className="slider-des">
-                  <h1 className="sl-title white-color">جامعة بحري</h1>
-                  <div className="sl-desc">
-                    هذا النص بديل لنص آخر سيتم تعديلة بالمحتوى الأصلي هذا
-                    للتجريب شكل المحتوى فقط.
-                  </div>
+                  <h1 className="sl-title white-color">{t("univ")}</h1>
+                  <div className="sl-desc">{t("desc")}</div>
                   <div className="slider-bottom">
                     <ul>
                       <li>
                         <a href="#" className="default-btn btn">
-                          المزيد<i className="flaticon-next"></i>
+                          {t("readMore")}
+                          <i className="flaticon-next"></i>
                         </a>
                       </li>
                     </ul>
@@ -93,3 +94,33 @@ export default function Slider() {
     </>
   );
 }
+
+const translate: ITranslate = {
+  start: {
+    en: "Start your educational journey here",
+    ar: "إبدا مشوارك التعليمي هنا",
+  },
+  desc: {
+    en: `
+      This text is an alternative to another text that will be modified with this original content
+       For experimentation form content only.`,
+    ar: `
+    هذا النص بديل لنص آخر سيتم تعديلة بالمحتوى الأصلي هذا
+     للتجريب شكل المحتوى فقط.
+    `,
+  },
+  univ: {
+    en: "The University of Bahri",
+    ar: "جامعة بحري",
+  },
+
+  colleges: {
+    ar: "الكليات",
+    en: "Colleges",
+  },
+
+  readMore: {
+    ar: "المزيد",
+    en: "Read More",
+  },
+};

@@ -3,6 +3,7 @@ import { ITranslate, useTranslate } from "@/utils/translate.util";
 import { httpClient, uploadFileUrl } from "@/utils/util.http";
 import { useRouter } from "next/router";
 import React, { useEffect, useState } from "react";
+import Link from "next/link";
 
 function ImportantNews() {
   const [news, setNews] = useState<News[]>([]);
@@ -64,10 +65,12 @@ function ImportantNews() {
                       <h3>{one?.title[lng]} </h3>
                       <p>{one?.description[lng]?.slice(0, 150)}</p>
                     </a>
-                    <a href="#" className="default-btn btn">
-                      {t("readMore")}
-                      <i className="flaticon-next"></i>
-                    </a>
+                    <Link href={`/news/${one?.id}`}>
+                      <a className="default-btn btn">
+                        {t("readMore")}
+                        <i className="flaticon-next"></i>
+                      </a>
+                    </Link>
                   </div>
                 </div>
               </div>
@@ -106,10 +109,12 @@ function ImportantNews() {
                       <h3>{tow?.title[lng]}</h3>
                       <p>{tow?.description[lng].slice(0, 150)}</p>
                     </a>
-                    <a href="#" className="default-btn btn">
-                      {t("readMore")}
-                      <i className="flaticon-next"></i>
-                    </a>
+                    <Link href={`/news/${tow?.id}`}>
+                      <a className="default-btn btn">
+                        {t("readMore")}
+                        <i className="flaticon-next"></i>
+                      </a>
+                    </Link>
                   </div>
                 </div>
               </div>
@@ -146,10 +151,12 @@ function ImportantNews() {
                   <h3>{three?.title[lng]} </h3>
                   <p>{three?.description[lng].slice(0, 280)}</p>
                 </a>
-                <a href="#" className="default-btn btn">
-                  {t("readMore")}
-                  <i className="flaticon-next"></i>
-                </a>
+                <Link href={`/news/${three?.id}`}>
+                  <a className="default-btn btn">
+                    {t("readMore")}
+                    <i className="flaticon-next"></i>
+                  </a>
+                </Link>
               </div>
             </div>
           </div>

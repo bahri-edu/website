@@ -1,6 +1,24 @@
-import React from "react";
+import { Social } from "@/types/models";
+import { ITranslate, useTranslate } from "@/utils/translate.util";
+import { httpClient } from "@/utils/util.http";
+import { useRouter } from "next/router";
+import React, { useEffect, useState } from "react";
 
 function CopyWrite() {
+  const { locale } = useRouter();
+
+  const [socials, setSocials] = useState<Social[]>([]);
+
+  const t = useTranslate(translate, locale);
+
+  const lng = locale == "ar" ? "ar" : "en";
+
+  useEffect(() => {
+    (async function () {
+      const [contact] = await httpClient("contact");
+      setSocials(contact?.socials || []);
+    })();
+  }, []);
   return (
     <div className="copyright-area">
       <div className="container">
@@ -9,32 +27,19 @@ function CopyWrite() {
             <div className="col-lg-6 col-md-4">
               <div className="social-content">
                 <ul>
-                  <li>
-                    <a href="#" target="_blank">
-                      <i className="ri-facebook-fill"></i>
-                    </a>
-                  </li>
-                  <li>
-                    <a href="#" target="_blank">
-                      <i className="ri-twitter-fill"></i>
-                    </a>
-                  </li>
-                  <li>
-                    <a href="#" target="_blank">
-                      <i className="ri-instagram-line"></i>
-                    </a>
-                  </li>
-                  <li>
-                    <a href="#" target="_blank">
-                      <i className="ri-linkedin-fill"></i>
-                    </a>
-                  </li>
+                  {socials.map((s) => (
+                    <li key={s.url}>
+                      <a href={s.url} target="_blank" rel="noreferrer">
+                        <i className={s.icon}></i>
+                      </a>
+                    </li>
+                  ))}
                 </ul>
               </div>
             </div>
             <div className="col-lg-6 col-md-8">
               <div className="copy">
-                <p>© 2023 جميع الحقوق محفوظة - جامعة بحري</p>
+                <p>© 2023 {t("copyWrite")}</p>
               </div>
             </div>
           </div>
@@ -45,3 +50,10 @@ function CopyWrite() {
 }
 
 export default CopyWrite;
+
+const translate: ITranslate = {
+  copyWrite: {
+    en: "All rights reserved - University of Bahri",
+    ar: "جميع الحقوق محفوظة - جامعة بحري",
+  },
+};

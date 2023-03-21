@@ -34,10 +34,7 @@ function Footer() {
               <a href="index.html">
                 <img src="/images/logo-bahri.jpg" alt="Image" width="90" />
               </a>
-              <p>
-                جامعة ورثت تقاليد متجذرة من أسلافها في جامعات جوبا وأعالي النيل
-                وبحر الغزال ورمبيك.
-              </p>
+              <p>{t("slogan")}</p>
             </div>
           </div>
           <div className="col-lg-3 col-sm-6">
@@ -74,16 +71,16 @@ function Footer() {
               <div className="list">
                 <ul>
                   <li>
-                    <a href="#">المعاهد</a>
+                    <a href="#">{t("institutes")}</a>
                   </li>
                   <li>
-                    <a href="#">الكليات</a>
+                    <a href="#">{t("colleges")}</a>
                   </li>
                   <li>
-                    <a href="#">الأبحاث</a>
+                    <a href="#">{t("researches")}</a>
                   </li>
                   <li>
-                    <a href="#">أسئلة متكررة</a>
+                    <a href="#">{t("FAQ")}</a>
                   </li>
                 </ul>
               </div>
@@ -131,10 +128,17 @@ const translate: ITranslate = {
     en: "Contact Us",
   },
 
-  // location: {
-  //   ar: "السودان - الخرطوم بحري",
-  //   en: "Sudan - Khartoum North",
-  // },
+  slogan: {
+    ar: `
+    جامعة ورثت تقاليد متجذرة
+     من أسلافها في جامعات جوبا وأعالي النيل وبحر الغزال ورمبيك.
+    `,
+    en: `
+       
+    A university that inherited traditions rooted from its predecessors 
+    in the universities of Juba, Upper Nile, Bahr El Ghazal and Rumbek.
+    `,
+  },
   otherPages: {
     ar: "صفحات أخرى",
     en: "Other pages",
@@ -142,5 +146,21 @@ const translate: ITranslate = {
   relatedSite: {
     ar: "مواقع ذات صلة ",
     en: "Related sites",
+  },
+  institutes: {
+    ar: "المعاهد",
+    en: "Institutes",
+  },
+  colleges: {
+    ar: "الكليات",
+    en: "colleges",
+  },
+  researches: {
+    ar: "الأبحاث",
+    en: "Researches",
+  },
+  FAQ: {
+    ar: "أسئلة متكررة",
+    en: "FAQs",
   },
 };

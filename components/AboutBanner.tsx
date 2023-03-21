@@ -1,4 +1,6 @@
+import { ITranslate, useTranslate } from "@/utils/translate.util";
 import Link from "next/link";
+import { useRouter } from "next/router";
 import React from "react";
 
 function AboutBanner({
@@ -8,6 +10,11 @@ function AboutBanner({
   title: string;
   breadcrumbs: string[];
 }) {
+  const { locale } = useRouter();
+
+  const lng = locale == "ar" ? "ar" : "en";
+
+  const t = useTranslate(translate, locale);
   return (
     <div className="page-banner-area bg-2">
       <div className="container">
@@ -15,7 +22,7 @@ function AboutBanner({
           <h1>{title}</h1>
           <ul>
             <li>
-              <Link href="/">الرئيسية</Link>
+              <Link href="/">{t("home")}</Link>
             </li>
 
             {breadcrumbs.map((t) => (
@@ -29,3 +36,10 @@ function AboutBanner({
 }
 
 export default AboutBanner;
+
+const translate: ITranslate = {
+  home: {
+    en: "Home",
+    ar: "الرئيسية",
+  },
+};

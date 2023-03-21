@@ -35,11 +35,12 @@ function FactsAndFigure() {
                 <div key={item?.id} className="col-xl col-md-6">
                   <div className="counter-card">
                     <h1
-                    // style={{
-                    //   display: "flex",
-                    //   alignItems: "center",
-                    //   gap: "2px",
-                    // }}
+                      style={{
+                        display: "flex",
+                        alignItems: "center",
+                        justifyContent: "center",
+                        gap: "2px",
+                      }}
                     >
                       <span
                         className="odometer odometer-auto-theme"

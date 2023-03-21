@@ -21,7 +21,7 @@ export interface FactAndFigure {
   type: FactType;
 }
 
-interface Social {
+export interface Social {
   icon: string;
   url: string;
 }

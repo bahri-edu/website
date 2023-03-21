@@ -37,9 +37,9 @@ function NavigationMenu() {
     meanmenu.meanmenu({
       meanScreenWidth: "991",
     });
-    window.jQuery(window).on("scroll", function () {
+    window.jQuery(window).on("scroll", function (this: any) {
       if (window.jQuery(this).scrollTop() > 150) {
-        window.jQuery(".navbar-area").addClass("is-sticky");
+        window?.jQuery(".navbar-area").addClass("is-sticky");
       } else {
         window.jQuery(".navbar-area").removeClass("is-sticky");
       }
