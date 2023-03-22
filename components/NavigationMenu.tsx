@@ -3,6 +3,8 @@ import Link from "next/link";
 import { useRouter } from "next/router";
 
 import React, { useEffect } from "react";
+import AdministrationMenu from "./navbar/AdministrationItem";
+import UniversitItem from "./navbar/UniversitItem";
 
 declare global {
   interface Window {
@@ -107,69 +109,12 @@ function NavigationMenu() {
                     {t("home")}
                   </Link>
                 </li>
-                <li className="nav-item">
-                  <a
-                    href="#"
-                    className={`nav-link dropdown-toggle   
-                    ${isActive("/university") && " active"}
-                    `}
-                  >
-                    {t("university")}
-                  </a>
-                  <ul className="dropdown-menu">
-                    <li className="nav-item">
-                      <Link
-                        href="/university/vision-and-mission"
-                        className="nav-link"
-                      >
-                        {t("vision")}
-                      </Link>
-                    </li>
-                    <li className="nav-item">
-                      <Link
-                        href="/university/historical-background"
-                        className="nav-link"
-                      >
-                        الخلفية التاريخية
-                      </Link>
-                    </li>
-                    <li className="nav-item">
-                      <Link
-                        href="/university/facts-and-figures"
-                        className="nav-link"
-                      >
-                        حقائق و أرقام
-                      </Link>
-                    </li>
-                    <li className="nav-item">
-                      <Link href="/university/logo" className="nav-link">
-                        شعار الجامعة
-                      </Link>
-                    </li>
-                    <li className="nav-item">
-                      <Link
-                        href="/university/university-council"
-                        className="nav-link"
-                      >
-                        مجلس الجامعة
-                      </Link>
-                    </li>
-                    <li className="nav-item">
-                      <Link
-                        href="/university/the-deans-board"
-                        className="nav-link"
-                      >
-                        مجلس العمداء
-                      </Link>
-                    </li>
-                    <li className="nav-item">
-                      <Link href="/university/the-senate" className="nav-link">
-                        مجلس الأساتذة
-                      </Link>
-                    </li>
-                  </ul>
-                </li>
-                <li className="nav-item">
+
+                <UniversitItem {...{ pathname, locale }} />
+
+                <AdministrationMenu {...{ pathname, locale }} />
+
+                {/* <li className="nav-item">
                   <a
                     href="#"
                     className={`nav-link dropdown-toggle
@@ -339,7 +284,8 @@ function NavigationMenu() {
                       </ul>
                     </li>
                   </ul>
-                </li>
+                </li> */}
+
                 <li className="nav-item">
                   <a
                     href="#"
@@ -668,10 +614,7 @@ const translate: ITranslate = {
     en: " Vision & Mission",
     ar: " الرؤية و الرسالة",
   },
-  administration: {
-    en: "Administration",
-    ar: "الإدارة",
-  },
+
   admission: {
     en: "Admission",
     ar: "القبول",
