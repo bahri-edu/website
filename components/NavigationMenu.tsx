@@ -51,8 +51,13 @@ function NavigationMenu() {
     <div className="navbar-area nav-bg-1">
       <div className="mobile-responsive-nav">
         <div className="container">
-          <div className="mobile-responsive-menu">
-            <div className="logo">
+          <div
+            style={{
+              gap: "10px",
+            }}
+            className="mobile-responsive-menu"
+          >
+            <div className="logo ">
               <a href="index.html">
                 <img
                   src="/images/logo-bahri.jpg"
@@ -62,7 +67,24 @@ function NavigationMenu() {
                 />
               </a>
             </div>
-            <span className="lang">English</span>
+
+            {locale === "ar" ? (
+              <span
+                className="lang"
+                onClick={() => changeLanguage("en")}
+                style={{ cursor: "pointer" }}
+              >
+                {t("language")}
+              </span>
+            ) : (
+              <span
+                className="lang"
+                onClick={() => changeLanguage("ar")}
+                style={{ cursor: "pointer" }}
+              >
+                {t("language")}
+              </span>
+            )}
           </div>
         </div>
       </div>
@@ -610,7 +632,7 @@ function NavigationMenu() {
                       style={{ cursor: "pointer" }}
                     >
                       {t("language")}
-                      {/* <i className="ri-globe-line"></i> */}
+                      <i className="ri-globe-line"></i>
                     </a>
                   ) : (
                     <a
@@ -618,7 +640,7 @@ function NavigationMenu() {
                       style={{ cursor: "pointer" }}
                     >
                       {t("language")}
-                      {/* <i className="ri-globe-line"></i> */}
+                      <i className="ri-globe-line"></i>
                     </a>
                   )}
                 </div>

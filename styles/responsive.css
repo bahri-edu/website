@@ -3374,6 +3374,7 @@
     .mobile-responsive-nav .mobile-responsive-menu .logo {
         position: relative;
         z-index: 1;
+        cursor: pointer !important;
         max-width: 185px
     }
 
@@ -3533,7 +3534,7 @@
     }
 
     .mobile-responsive-nav .mobile-responsive-menu .lang {
-        cursor: pointer;
+        cursor: pointer !important;
         padding: 3px 8px;
         font-size: 14px;
         background: #008a3d;
@@ -3543,10 +3544,12 @@
         top: 51%;
         transform: translateY(-50%);
         right: 13%;
-        display: block;
+        display: inline-block;
+        margin-top: 20px;
     }
 
     html[dir="rtl"] .mobile-responsive-nav .mobile-responsive-menu .lang {
+        cursor: pointer !important;
         right: auto;
         left: 13%;
     }
@@ -3589,6 +3592,7 @@
     }
 
     html[dir="rtl"] .mobile-responsive-nav .mobile-responsive-menu .lang {
+        cursor: pointer !important;
         right: auto;
         left: 12%;
     }

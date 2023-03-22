@@ -5,6 +5,8 @@ import "../styles/flaticon.css";
 import "../styles/remixicon.css";
 import "../styles/animate.css";
 import "../styles/aos.css";
+import "../styles/responsive.css";
+import "../styles/meanmenu.css";
 import "../styles/moduls/Slider.module.css";
 import "swiper/css";
 import "swiper/css/navigation";
@@ -18,9 +20,9 @@ import CopyWrite from "@/components/CopyWrite";
 import Script from "next/script";
 
 export default function App({ Component, pageProps }: AppProps) {
-  // useEffect(() => {
-  //   import("@/styles/js/bootstrap.bundle.min.js");
-  // }, []);
+  useEffect(() => {
+    import("@/styles/js/bootstrap.bundle.min.js");
+  }, []);
 
   return (
     <>
