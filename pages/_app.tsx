@@ -7,6 +7,7 @@ import "../styles/animate.css";
 import "../styles/aos.css";
 import "../styles/responsive.css";
 import "../styles/meanmenu.css";
+import "../styles/owl.theme.default.min.css";
 import "../styles/moduls/Slider.module.css";
 import "swiper/css";
 import "swiper/css/navigation";

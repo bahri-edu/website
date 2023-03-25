@@ -8,17 +8,23 @@ function RelatedDownload() {
       <ul>
         <li>
           <Link href="#">
-            <i className="flaticon-pdf-file"></i>النبذة التاريخية
+            <a>
+              <i className="flaticon-pdf-file"></i>النبذة التاريخية
+            </a>
           </Link>
         </li>
         <li>
           <Link href="#">
-            <i className="flaticon-pdf-file"></i>الكليات
+            <a>
+              <i className="flaticon-pdf-file"></i>الكليات
+            </a>
           </Link>
         </li>
         <li>
           <Link href="#">
-            <i className="flaticon-pdf-file"></i>اللوائح
+            <a>
+              <i className="flaticon-pdf-file"></i>اللوائح
+            </a>
           </Link>
         </li>
       </ul>

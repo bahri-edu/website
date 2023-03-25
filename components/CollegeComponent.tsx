@@ -1,42 +1,20 @@
-"use client";
+import { College } from "@/types/models";
+import { ITranslate, useTranslate } from "@/utils/translate.util";
 import React, { useEffect } from "react";
+import CollegeNewsCard from "./CollegeNewsCard";
 
-import "@/styles/owl.theme.default.min.css";
+import { Swiper, SwiperSlide } from "swiper/react";
+import { Navigation, Pagination, Scrollbar, A11y } from "swiper";
 
-function CollegeComponent() {
-  useEffect(() => {
-    window.jQuery = require("@/styles/js/jquery.min.js");
-    window.OwlCarousel = require("@/styles/js/owl.carousel.min.js");
+function CollegeComponent({
+  college,
+  lng,
+}: {
+  college: College;
+  lng: "ar" | "en";
+}) {
+  const t = useTranslate(translate, lng);
 
-    window.jQuery(".news-college-slider").owlCarousel({
-      loop: true,
-      margin: 30,
-      nav: true,
-      dots: true,
-      thumbs: false,
-      autoplay: false,
-      smartSpeed: 1000,
-      autoplayHoverPause: true,
-      navText: [
-        '<i class="ri-arrow-left-line"></i>',
-        '<i class="ri-arrow-right-line"></i>',
-      ],
-      responsive: {
-        0: {
-          items: 1,
-        },
-        768: {
-          items: 2,
-        },
-        992: {
-          items: 3,
-        },
-        1200: {
-          items: 3,
-        },
-      },
-    });
-  }, []);
   return (
     <>
       {/* <!--- SECTION CONTENT --> */}
@@ -45,56 +23,39 @@ function CollegeComponent() {
           <div className="row">
             <div className="col-lg-8">
               <div className="section-title style2">
-                <h2>نبذة تعريفية</h2>
-                <p>
-                  هذا النص بديل لنص آخر سيتم تعديلة بالمحتوى الأصلي هذا للتجريب
-                  شكل المحتوى فقط هذا النص بديل لنص آخر سيتم تعديلة بالمحتوى
-                  الأصلي هذا للتجريب شكل المحتوى فقط هذا النص بديل لنص آخر سيتم
-                  تعديلة بالمحتوى الأصلي هذا للتجريب شكل المحتوى فقط هذا النص
-                  بديل لنص آخر سيتم تعديلة بالمحتوى الأصلي هذا للتجريب شكل
-                  المحتوى فقط هذا النص بديل لنص آخر سيتم تعديلة بالمحتوى الأصلي
-                  هذا للتجريب شكل المحتوى هذا النص بديل لنص آخر سيتم تعديلة
-                  بالمحتوى فقط هذا النص بديل لنص آخر سيتم تعديلة بالمحتوى الأصلي
-                  هذا للتجريب شكل المحتوى فقط.
-                </p>
-                <p>
-                  هذا النص بديل لنص آخر سيتم تعديلة بالمحتوى الأصلي هذا للتجريب
-                  شكل المحتوى فقط هذا النص بديل لنص آخر سيتم تعديلة بالمحتوى
-                  الأصلي هذا للتجريب شكل المحتوى فقط هذا النص بديل لنص آخر سيتم
-                  تعديلة بالمحتوى الأصلي هذا للتجريب شكل المحتوى فقط هذا النص
-                  بديل لنص آخر سيتم تعديلة بالمحتوى الأصلي هذا للتجريب شكل
-                  المحتوى فقط هذا النص بديل لنص آخر سيتم تعديلة بالمحتوى الأصلي
-                  هذا للتجريب شكل المحتوى هذا النص بديل لنص آخر سيتم تعديلة
-                  بالمحتوى فقط هذا النص بديل لنص آخر سيتم تعديلة بالمحتوى الأصلي
-                  هذا للتجريب شكل المحتوى فقط.
-                </p>
+                <h2>{t("introduction")}</h2>
+                <p>{college?.introduction?.[lng]}</p>
+
                 <a href="admission-overview.html" className="default-btn btn">
-                  التقديم و القبول<i className="flaticon-next"></i>
+                  {t("admissions")}
+                  <i className="flaticon-next"></i>
                 </a>
               </div>
             </div>
             <div className="col-lg-4">
               <div className="categories style-2">
-                <h3>الكلية في أرقام</h3>
+                <h3>{t("collegeInNumber")}</h3>
                 <ul>
                   <li>
                     <a href="#">
                       <i className="flaticon-student-with-graduation-cap"></i>
-                      عدد الطلاب
+                      {t("numberOfStudent")}
                     </a>{" "}
-                    <span>3,000</span>
+                    <span>{college?.counter?.student}</span>
                   </li>
                   <li>
                     <a href="#">
-                      <i className="flaticon-writing-tool"></i>عدد الأقسام
+                      <i className="flaticon-writing-tool"></i>
+                      {t("numberOfDepartment")}
                     </a>
-                    <span>10</span>
+                    <span>{college?.counter?.department}</span>
                   </li>
                   <li>
                     <a href="#">
-                      <i className="flaticon-user"></i>عدد الأساتذة
+                      <i className="flaticon-user"></i>
+                      {t("numberOfStaff")}
                     </a>
-                    <span>20</span>
+                    <span>{college?.counter?.staff}</span>
                   </li>
                 </ul>
               </div>
@@ -112,7 +73,7 @@ function CollegeComponent() {
       <div className="graduate-admission pt-100">
         <div className="container">
           <div className="section-title style2 style3">
-            <h2>معلومات عن الكلية</h2>
+            <h2> {t("aboutCollegeTitle")}</h2>
           </div>
           <div className="row" style={{ justifyContent: "center" }}>
             <div className="col-lg-12">
@@ -138,7 +99,7 @@ function CollegeComponent() {
                           aria-controls="nav-overview"
                           aria-selected="true"
                         >
-                          الرؤية
+                          {t("vision")}
                         </button>
                         <button
                           className="nav-link"
@@ -151,7 +112,7 @@ function CollegeComponent() {
                           aria-selected="false"
                           tabIndex={-1}
                         >
-                          التأهيل الأكاديمي
+                          {t("academicQualification")}
                         </button>
                         <button
                           className="nav-link"
@@ -164,7 +125,7 @@ function CollegeComponent() {
                           aria-selected="false"
                           tabIndex={-1}
                         >
-                          برنامج البكالريوس
+                          {t("bachelorProgram")}
                         </button>
                         <button
                           className="nav-link"
@@ -177,7 +138,7 @@ function CollegeComponent() {
                           aria-selected="false"
                           tabIndex={-1}
                         >
-                          خطوات التسجيل
+                          {t("registrationStep")}
                         </button>
                         <button
                           className="nav-link"
@@ -190,7 +151,7 @@ function CollegeComponent() {
                           aria-selected="false"
                           tabIndex={-1}
                         >
-                          أقسام الكلية
+                          {t("collegeDepartment")}
                         </button>
                       </div>
                     </nav>
@@ -205,19 +166,8 @@ function CollegeComponent() {
                           <div className="col-xl-12">
                             <div className="overview">
                               <div className="learn">
-                                <h3>الرؤية</h3>
-                                <p>
-                                  تم تشكيل أول مجلس للجامعة في عام 2012 وتم
-                                  تمديد عضويته بأمر رئاسي في عام 2011 ، لتتماشى
-                                  بشكل وثيق مع أحكام قانون جامعة بحري لعام 2011.
-                                  المجلس هو الجهاز الأعلى للجامعة وهو المسؤول
-                                  لوضع سياستها العامة وإشرافها وحسن أدائها.
-                                </p>
-                                <p>
-                                  وفقًا لأحكام القسم 3 (8) من قانون جامعة بحري
-                                  لعام 2011 ، يضع المجلس القواعد التالية لتنظيم
-                                  سير أعماله.
-                                </p>
+                                <h3> {t("vision")}</h3>
+                                <p>{college?.info?.vision?.[lng]}</p>
                               </div>
                             </div>
                           </div>
@@ -232,44 +182,10 @@ function CollegeComponent() {
                         <div className="row">
                           <div className="col-xl-12">
                             <div className="curriculum">
-                              <h3>التأهيل الاكاديمي</h3>
-                              <div className="list">
-                                <ul>
-                                  <li>
-                                    يشار إلى هذه القواعد باسم &quot النظام
-                                    الداخلي لمجلس جامعة بحري& quot وتدخل حيز
-                                    التنفيذ بمجرد توقيعها من قبل رئيس المجلس.
-                                  </li>
-                                  <li>
-                                    في هذه القواعد ، ما لم يقتض السياق معنى آخر
-                                    ، يكون للكلمات التالية المعاني المخصصة لها
-                                    فيما بعد على التوالي:
-                                  </li>
-                                </ul>
-                              </div>
+                              <h3> {t("academicQualification")}</h3>
 
-                              <div className="list tow">
-                                <ul>
-                                  <li>
-                                    1. <strong>القانون:</strong> يقصد به قانون
-                                    جامعة البحري 2011
-                                  </li>
-                                  <li>
-                                    2. <strong>الرئيس:</strong> يقصد به رئيس
-                                    مجلس جامعة البحري ، ويشمل أيضًا الشخص
-                                    المنتخب من قبل المجلس وفقًا لهذه القواعد
-                                    لرئاسة اجتماع له عند غياب الرئيس.
-                                  </li>
-                                  <li>
-                                    3. <strong>السكرتير:</strong> يقصد به الموظف
-                                    المعين وفقا للنظام الأساسي للعمل مقررا
-                                    للمجلس.
-                                  </li>
-                                  <li>
-                                    4. <strong>نائب المدير:</strong> يقصد به
-                                    نائب مدير جامعة بحري.
-                                  </li>
-                                </ul>
+                              <div>
+                                {college?.info?.academicQualification?.[lng]}
                               </div>
                             </div>
                           </div>
@@ -282,50 +198,9 @@ function CollegeComponent() {
                         aria-labelledby="nav-instructor-tab"
                       >
                         <div className="curriculum">
-                          <h3>برنامج البكالريوس</h3>
-                          <div className="list">
-                            <ul>
-                              <li>
-                                يجتمع المجلس لتصريف أعماله مرتين في السنة على
-                                الأقل في الزمان والمكان اللذين قد يعينهما الرئيس
-                                لهذه المناسبة ، بشرط أن يدعو الرئيس إلى اجتماع
-                                خاص للمجلس عند تلقي طلب خطي. من نائب رئيس
-                                الجامعة أو من الأغلبية البسيطة لأعضاء المجلس.
-                              </li>
-                              <li>
-                                للمجلس أن يدعو أي شخص لحضور أي جلسة من جلساته أو
-                                جزء منها بشرط ألا يصوت.
-                              </li>
-                              <li>يتولى رئيس المجلس رئاسة جميع اجتماعاته.</li>
-                              <li>
-                                في حالة غياب الرئيس ينتخب المجلس رئيساً من بين
-                                أعضائه. ولكن في حالة وصول رئيس المجلس بعد توليه
-                                الرئاسة ، يقوم الرئيس المنتخب بإخلاء الرئاسة
-                                لصالح رئيس المجلس.
-                              </li>
-                              <li>
-                                بالإضافة إلى ممارسة الصلاحيات المخولة له في
-                                مواضع أخرى من هذه القواعد ، يعلن الرئيس افتتاح
-                                واختتام كل اجتماع ، ويدير المناقشات ، ويسمح
-                                للكلام ، ويحافظ على النظام في الجلسات.
-                              </li>
-                              <li>
-                                دون المساس بمصلحة المناقشة ، يدعو الرئيس
-                                المتحدثين بالترتيب الذي أبدوا فيه رغبتهم في
-                                الكلام بشرط أن تُمنح الأسبقية دائمًا لنائب
-                                المستشار إذا طلب الإذن بالتحدث.
-                              </li>
-                              <li>
-                                عند منح الإذن بالكلام ، يجب على العضو مخاطبة
-                                الرئيس.
-                              </li>
-                              <li>
-                                أثناء مناقشة أية مسألة ، يجوز لأي عضو أن يثير
-                                نقطة نظام في أي وقت ، ويبت الرئيس في النقطة
-                                النظامية على الفور.
-                              </li>
-                            </ul>
-                          </div>
+                          <h3> {t("bachelorProgram")}</h3>
+
+                          <div>{college?.info?.bachelorProgram?.[lng]}</div>
                         </div>
                       </div>
                       <div
@@ -337,25 +212,9 @@ function CollegeComponent() {
                         <div className="row">
                           <div className="col-xl-12">
                             <div className="curriculum">
-                              <h3>خطوات التسجيل</h3>
+                              <h3>{t("registrationStep")}</h3>
                               <div className="list">
-                                <ul>
-                                  <li>
-                                    يضع المقرر جدول أعمال كل اجتماع من اجتماعات
-                                    المجلس بالتشاور مع الرئيس ويبلغ إلى الأعضاء
-                                    قبل شهر على الأقل من الاجتماع.
-                                  </li>
-                                  <li>
-                                    يجوز لرئيس المجلس ، قبل أو أثناء الاجتماع ،
-                                    مراجعة جدول الأعمال بحذف أو تأجيل أو تعديل
-                                    أو إضافة بنود.
-                                  </li>
-                                  <li>
-                                    ينظر المجلس في بنود جدول الأعمال بالترتيب
-                                    الذي تم ترتيبها به بشرط أن يكون للرئيس ، إذا
-                                    رأى ضرورة لذلك ، الأسبقية لأي بند.
-                                  </li>
-                                </ul>
+                                {college?.info?.bachelorProgram?.[lng]}
                               </div>
                             </div>
                           </div>
@@ -371,59 +230,19 @@ function CollegeComponent() {
                         <div className="row">
                           <div className="col-xl-6">
                             <div className="curriculum">
-                              <h3>أقسام الكلية</h3>
+                              <h3>{t("collegeDepartment")}</h3>
                               <div className="list">
                                 <ul>
-                                  <li>قسم الكهرباء</li>
-                                  <li>قسم الميكانيكا</li>
-                                  <li>قسم المساحة</li>
-                                  <li>قسم الكهرباء</li>
-                                  <li>قسم البرترول</li>
+                                  {college?.info?.collegeDepartment?.map(
+                                    (dep, x) => (
+                                      <li key={`dep-${x}`}>{dep?.[lng]}</li>
+                                    )
+                                  )}
                                 </ul>
                               </div>
                             </div>
                           </div>
                           <div className="col-xl-6">
-                            <div className="img">
-                              <img src="/images/bah2.jpg" alt="Image" />
-                            </div>
-                          </div>
-                        </div>
-                      </div>
-
-                      <div
-                        className="tab-pane fade"
-                        id="nav-meeting"
-                        role="tabpanel"
-                        aria-labelledby="nav-meeting-tab"
-                      >
-                        <div className="row">
-                          <div className="col-xl-7">
-                            <div className="curriculum">
-                              <h3>إجتماع المجلس</h3>
-                              <div className="list">
-                                <ul>
-                                  <li>
-                                    يكون المقرر مسؤولا عن إعداد وتداول محاضر
-                                    المجلس. ويكون مسؤولاً أيضًا عن حفظ وثائق
-                                    وسجلات المجلس.
-                                  </li>
-                                  <li>
-                                    يتأكد السكرتير من توزيع محضر كل اجتماع على
-                                    الأعضاء قبل أسبوع على الأقل من الاجتماع
-                                    التالي للمجلس.
-                                  </li>
-                                  <li>
-                                    يقدم محضر كل اجتماع للمجلس إلى الاجتماع
-                                    التالي للمصادقة عليه.
-                                  </li>
-                                  <li>تعطى الدقائق رقما متسلسلا.</li>
-                                </ul>
-                              </div>
-                            </div>
-                          </div>
-
-                          <div className="col-xl-5">
                             <div className="img">
                               <img src="/images/bah2.jpg" alt="Image" />
                             </div>
@@ -441,7 +260,7 @@ function CollegeComponent() {
       {/* <!--- /. SECTION CONTENT --> */}
 
       {/* <!--- SECTION CONTENT --> */}
-      <div className="campus-life-area pb-70">
+      {/* <div className="campus-life-area pb-70">
         <div className="container">
           <div className="section-title style2 style3">
             <h2>أقسام الكلية</h2>
@@ -498,7 +317,7 @@ function CollegeComponent() {
             </div>
           </div>
         </div>
-      </div>
+      </div> */}
       {/* <!--- /. SECTION CONTENT --> */}
 
       {/* <!--- SECTION CONTENT --> */}
@@ -508,69 +327,35 @@ function CollegeComponent() {
             <h2>أخبار الكلية</h2>
           </div>
           <div className="news-college-slider owl-carousel owl-theme">
-            <div className="single-news-card style2">
-              <div className="news-img">
-                <a href="new-details.html">
-                  <img src="/images/bah1.jpg" alt="Image" />
-                </a>
-              </div>
-              <div className="news-content">
-                <a href="new-details.html">
-                  <h3>هذا النص بديل لنص أخر سيتم تغييرة</h3>
-                </a>
-                <a href="new-details.html" className="read-more-btn">
-                  <i className="flaticon-next"></i> إقرء المزيد
-                </a>
-              </div>
-            </div>
-
-            <div className="single-news-card style2">
-              <div className="news-img">
-                <a href="new-details.html">
-                  <img src="/images/bah2.jpg" alt="Image" />
-                </a>
-              </div>
-              <div className="news-content">
-                <a href="new-details.html">
-                  <h3>هذا النص بديل لنص أخر سيتم تغييرة</h3>
-                </a>
-                <a href="new-details.html" className="read-more-btn">
-                  <i className="flaticon-next"></i> إقرء المزيد
-                </a>
-              </div>
-            </div>
-
-            <div className="single-news-card style2">
-              <div className="news-img">
-                <a href="new-details.html">
-                  <img src="/images/bah1.jpg" alt="Image" />
-                </a>
-              </div>
-              <div className="news-content">
-                <a href="new-details.html">
-                  <h3>هذا النص بديل لنص أخر سيتم تغييرة</h3>
-                </a>
-                <a href="new-details.html" className="read-more-btn">
-                  <i className="flaticon-next"></i> إقرء المزيد
-                </a>
-              </div>
-            </div>
-
-            <div className="single-news-card style2">
-              <div className="news-img">
-                <a href="new-details.html">
-                  <img src="/images/bah2.jpg" alt="Image" />
-                </a>
-              </div>
-              <div className="news-content">
-                <a href="new-details.html">
-                  <h3>هذا النص بديل لنص أخر سيتم تغييرة</h3>
-                </a>
-                <a href="new-details.html" className="read-more-btn">
-                  <i className="flaticon-next"></i> إقرء المزيد
-                </a>
-              </div>
-            </div>
+            <Swiper
+              modules={[Navigation, Pagination, Scrollbar, A11y]}
+              spaceBetween={10}
+              navigation
+              breakpoints={{
+                640: {
+                  width: 640,
+                  slidesPerView: 1,
+                },
+                768: {
+                  width: 768,
+                  slidesPerView: 2,
+                },
+              }}
+              pagination={{ clickable: true }}
+              scrollbar={{ draggable: true }}
+              onSlideChange={() => console.log("slide change")}
+              onSwiper={(swiper) => console.log(swiper)}
+            >
+              {[1, 2, 3, 4].map((r, x) => (
+                <SwiperSlide key={x}>
+                  <CollegeNewsCard
+                    key={r}
+                    title="هذا النص بديل لنص أخر سيتم تغييرة"
+                    readMore={t("readMore")}
+                  />
+                </SwiperSlide>
+              ))}
+            </Swiper>
           </div>
         </div>
       </div>
@@ -579,3 +364,66 @@ function CollegeComponent() {
 }
 
 export default CollegeComponent;
+
+const translate: ITranslate = {
+  title: {
+    ar: "عن الجامعة",
+    en: "About University",
+  },
+  readMore: {
+    ar: "إقرأ المزيد",
+    en: "Read More",
+  },
+  introduction: {
+    ar: "نبذة تعريفية",
+    en: "Introduction",
+  },
+  admissions: {
+    ar: " التقديم و القبول",
+    en: "Submission and Admissions",
+  },
+  collegeInNumber: {
+    ar: "الكلية في أرقام",
+    en: "College in numbers",
+  },
+  numberOfStudent: {
+    ar: "عدد الطلاب",
+    en: "number of students",
+  },
+  numberOfDepartment: {
+    ar: "عدد الأقسام",
+    en: "The number of Department",
+  },
+  numberOfStaff: {
+    ar: "عدد الأساتذة",
+    en: "The number of Staff",
+  },
+  aboutCollegeTitle: {
+    ar: "معلومات عن الكلية",
+    en: "Information about the college",
+  },
+  vision: {
+    ar: "الرؤية",
+    en: "Vision",
+  },
+  academicQualification: {
+    ar: "التأهيل الاكاديمي",
+    en: "Academic qualification",
+  },
+  bachelorProgram: {
+    ar: "برنامج البكالريوس",
+    en: "Bachelor's program",
+  },
+  registrationStep: {
+    ar: "خطوات التسجيل",
+    en: "Registration steps",
+  },
+  collegeDepartment: {
+    ar: "أقسام الكلية",
+    en: "College departments",
+  },
+  // introduction: {
+  //   ar: "نبذة تعريفية",
+  //   en: "Introduction",
+  // },
+};

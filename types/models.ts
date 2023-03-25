@@ -7,6 +7,30 @@ export interface News {
   createdAt: any;
 }
 
+export interface College {
+  id: string;
+  name: Translate;
+  image: string;
+  code: string;
+  introduction: Translate;
+  info: CollegeInfo;
+  counter: Counter;
+}
+
+export interface Counter {
+  student: number;
+  department: number;
+  staff: number;
+}
+
+export interface CollegeInfo {
+  vision: Translate;
+  academicQualification: Translate;
+  bachelorProgram: Translate;
+  registrationStep: Translate;
+  collegeDepartment: Translate[];
+}
+
 export interface EService {
   id: string;
   title: Translate;
@@ -32,6 +56,14 @@ export interface Contact {
   email: string;
   fax: string;
   socials: Social[];
+}
+
+export interface VisionMission {
+  id: string;
+  title: Translate;
+  description: Translate;
+  sqNo: number;
+  icon: string;
 }
 
 export interface RelatedSite {
