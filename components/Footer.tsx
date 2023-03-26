@@ -46,8 +46,8 @@ function Footer() {
                     <i className="ri-map-2-line"></i>
                     {contact[0]?.location[lng]}
                   </li>
-                  {contact[0]?.phone?.map((p) => (
-                    <li key={p} className="none">
+                  {contact[0]?.phone?.map((p, x) => (
+                    <li key={p + x} className="none">
                       <i className="ri-phone-line"></i>
 
                       <a href="tel:">
@@ -91,8 +91,8 @@ function Footer() {
               <h3>{t("relatedSite")}</h3>
               <div className="list">
                 <ul>
-                  {related.map((r) => (
-                    <li key={r.url}>
+                  {related.map((r, x) => (
+                    <li key={r.url + x}>
                       <a href={r.url}>{r.text?.[lng]}</a>
                     </li>
                   ))}

@@ -27,8 +27,8 @@ function CopyWrite() {
             <div className="col-lg-6 col-md-4">
               <div className="social-content">
                 <ul>
-                  {socials.map((s) => (
-                    <li key={s.url}>
+                  {socials.map((s, x) => (
+                    <li key={s.url + x}>
                       <a href={s.url} target="_blank" rel="noreferrer">
                         <i className={s.icon}></i>
                       </a>

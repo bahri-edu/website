@@ -1,3 +1,5 @@
+import { ITranslate, useTranslate } from "@/utils/translate.util";
+import { useRouter } from "next/router";
 import React from "react";
 
 export type CurrentAdministrationProps = {
@@ -41,6 +43,11 @@ function CurrentAdministration({
   qualifications,
   socials,
 }: CurrentAdministrationProps) {
+  const { locale } = useRouter();
+
+  const lng = locale == "ar" ? "ar" : "en";
+
+  const t = useTranslate(translate, locale);
   return (
     <div className="pt-100 pb-70">
       <div className="container">
@@ -62,41 +69,41 @@ function CurrentAdministration({
                     <ul className="row">
                       <li className="col-md-6">
                         <i className="ri-user-line"></i>
-                        <span>الإسم:</span>
+                        <span> {t("name")}:</span>
                         <div className="content">{name}</div>
                       </li>
                       <li className="col-md-6">
                         <i className="ri-calendar-2-line"></i>
-                        <span>تاريخ الميلاد:</span>
+                        <span>{t("dateOfBirth")}:</span>
                         <div className="content">{birthdate}</div>
                       </li>
                       <li className="col-md-6">
                         <i className="ri-contacts-book-2-line"></i>
-                        <span>الدرجة العلمية:</span>
+                        <span>{t("degree")}:</span>
                         <div className="content">{degree}</div>
                       </li>
                       <li className="col-md-6">
                         <i className="ri-mail-line"></i>
-                        <span>البريد الإلكتروني:</span>
+                        <span> {t("email")}:</span>
                         <div className="content">
                           <a href="mailto:">{email}</a>
                         </div>
                       </li>
                       <li className="col-md-6">
                         <i className="ri-cellphone-line"></i>
-                        <span>رقم الهاتف:</span>
+                        <span> {t("phone")}:</span>
                         <div className="content">
                           <a href="tel:">{phone}</a>
                         </div>
                       </li>
                       <li className="col-md-6">
                         <i className="ri-shopping-bag-line"></i>
-                        <span>الوظيفة:</span>
+                        <span>{t("position")}:</span>
                         <div className="content">{position}</div>
                       </li>
                     </ul>
                   </div>
-                  <h3>المؤهلات</h3>
+                  <h3>{t("qualification")}</h3>
                   <div className="how-to-apply">
                     <div className="apply-list">
                       <div className="row">
@@ -116,7 +123,7 @@ function CurrentAdministration({
                 </div>
 
                 <div className="social">
-                  <h3>مواقع التواصل</h3>
+                  <h3>{t("social")}</h3>
                   <ul>
                     {socials.map((s) => (
                       <li key={s.url}>
@@ -137,3 +144,39 @@ function CurrentAdministration({
 }
 
 export default CurrentAdministration;
+
+const translate: ITranslate = {
+  name: {
+    ar: "الإسم",
+    en: "Name",
+  },
+  dateOfBirth: {
+    ar: "تاريخ الميلاد",
+    en: "Date of Birth",
+  },
+  degree: {
+    ar: "الدرجة العلمية",
+    en: "Degree",
+  },
+
+  email: {
+    ar: "البريد الإلكتروني",
+    en: "Email",
+  },
+  phone: {
+    ar: "رقم الهاتف",
+    en: "Phone Number",
+  },
+  position: {
+    ar: "الوظيفة",
+    en: "Position",
+  },
+  qualification: {
+    ar: "المؤهلات",
+    en: "Qualifications",
+  },
+  social: {
+    ar: "مواقع التواصل",
+    en: "Social Media",
+  },
+};

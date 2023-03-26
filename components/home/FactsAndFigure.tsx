@@ -1,7 +1,6 @@
 import { FactAndFigure } from "@/types/models";
 import { httpClient } from "@/utils/util.http";
 import React, { useEffect, useState } from "react";
-import "@/styles/moduls/odometer.module.css";
 import { ITranslate, useTranslate } from "@/utils/translate.util";
 import { useRouter } from "next/router";
 

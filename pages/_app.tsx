@@ -5,6 +5,7 @@ import "../styles/flaticon.css";
 import "../styles/remixicon.css";
 import "../styles/animate.css";
 import "../styles/aos.css";
+import "../styles/odometer.min.css";
 import "../styles/responsive.css";
 import "../styles/meanmenu.css";
 import "../styles/owl.theme.default.min.css";

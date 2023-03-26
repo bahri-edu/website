@@ -82,6 +82,12 @@ export interface UpdateFactAndFigure {
   change: Partial<FactAndFigure>;
 }
 
+export interface HistoricalBackground {
+  id: string;
+  title: Translate;
+  description: Translate;
+}
+
 export enum FactType {
   STUDENT = "STUDENT",
   STAFF = "STAFF",
