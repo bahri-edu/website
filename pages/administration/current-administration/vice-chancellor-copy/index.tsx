@@ -1,7 +1,5 @@
 import AboutBanner from "@/components/AboutBanner";
-import CurrentAdministration, {
-  currentAdministrationProps,
-} from "@/components/CurrentAdministrationComponent";
+import CurrentAdministration from "@/components/CurrentAdministrationComponent";
 import { ITranslate, useTranslate } from "@/utils/translate.util";
 import { useRouter } from "next/router";
 import React from "react";
@@ -19,9 +17,9 @@ function ViceChancellor() {
         breadcrumbs={[t("currentAdministration"), t("title")]}
       />
 
-      <CurrentAdministration
+      {/* <CurrentAdministration
         {...{ ...currentAdministrationProps, position: t("title") }}
-      />
+      /> */}
     </>
   );
 }

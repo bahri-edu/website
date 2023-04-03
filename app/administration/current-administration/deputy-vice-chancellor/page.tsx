@@ -1,7 +1,5 @@
 import AboutBanner from "@/components/AboutBanner";
-import CurrentAdministration, {
-  currentAdministrationProps,
-} from "@/components/CurrentAdministrationComponent";
+import CurrentAdministration from "@/components/CurrentAdministrationComponent";
 import React from "react";
 
 function DeputyViceChancellor() {
@@ -12,9 +10,9 @@ function DeputyViceChancellor() {
         breadcrumbs={["إدارة الجامعة الحالية", "نائب مدير الجامعة"]}
       />
 
-      <CurrentAdministration
+      {/* <CurrentAdministration
         {...{ ...currentAdministrationProps, position: "نائب مدير الجامعة" }}
-      />
+      /> */}
     </>
   );
 }
