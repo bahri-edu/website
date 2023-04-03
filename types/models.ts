@@ -88,6 +88,12 @@ export interface HistoricalBackground {
   description: Translate;
 }
 
+export interface ViceChancellorMessage {
+  id: string;
+  title: Translate;
+  descriptions: Translate[];
+}
+
 export enum FactType {
   STUDENT = "STUDENT",
   STAFF = "STAFF",
@@ -96,4 +102,59 @@ export enum FactType {
 export enum NewsTypeEnum {
   ACADEMIC = "ACADEMIC",
   GENERAL = "GENERAL",
+}
+
+export enum CurrentPositionTypeEnum {
+  VICE_CHANCELLOR,
+  DEPUTY_VICE_CHANCELLOR,
+  PRINCIPAL,
+  SECRETARY_OF_SCIENTIFIC_AFFAIRS,
+}
+
+export interface CurrentAdministration {
+  id: string;
+  name: Translate;
+  imageUrl: string;
+  birthdate: string;
+  degree: Translate;
+  email: string;
+  phone: string;
+  position: Translate;
+  qualifications: Translate[];
+  socials: Social[];
+  positionType: CurrentPositionTypeEnum;
+}
+
+export interface UpdateCurrentAdministration {
+  id: string;
+  change: Partial<CurrentAdministration>;
+}
+
+export interface Info {
+  title: Translate;
+  icon: string;
+  description: Translate;
+}
+
+export interface Staff {
+  name: Translate;
+  position: Translate;
+  email: string;
+  phone: string;
+}
+
+export interface UniversityAdministration {
+  unit: Translate;
+  introduction: Translate;
+  info: Info[];
+  staffTitle: Translate;
+  staff: Staff[];
+  slug: string;
+}
+
+export interface Logo {
+  id: string;
+  title: Translate;
+  description: Translate;
+  seqNo: number;
 }

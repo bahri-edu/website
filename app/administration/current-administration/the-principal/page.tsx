@@ -1,7 +1,7 @@
 import AboutBanner from "@/components/AboutBanner";
 import CurrentAdministration, {
   currentAdministrationProps,
-} from "@/components/CurrentAdministration";
+} from "@/components/CurrentAdministrationComponent";
 import React from "react";
 
 function ThePrincipal() {

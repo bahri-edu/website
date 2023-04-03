@@ -4,6 +4,7 @@ import RelatedDownload from "@/components/RelatedDownload";
 import { VisionMission } from "@/types/models";
 import { ITranslate, useTranslate } from "@/utils/translate.util";
 import { httpClient } from "@/utils/util.http";
+import Head from "next/head";
 import { useRouter } from "next/router";
 import React from "react";
 
@@ -24,10 +25,10 @@ function VisionMission({ vision }: { vision: VisionMission[] }) {
   const t = useTranslate(translate, locale);
   return (
     <>
-      <AboutBanner
-        title="الرؤية و الرسالة"
-        breadcrumbs={["الرؤية و الرسالة"]}
-      />
+      <Head>
+        <title>{t("title")}</title>
+      </Head>
+      <AboutBanner title={t("title")} breadcrumbs={[t("title")]} />
 
       <div className="graduate-admission pt-100 pb-70">
         <div className="container">
@@ -105,8 +106,8 @@ export default VisionMission;
 
 const translate: ITranslate = {
   title: {
-    ar: "عن الجامعة",
-    en: "About University",
+    ar: "الرؤية و الرسالة",
+    en: "Vision and Mission",
   },
   college: {
     ar: "الكليات",

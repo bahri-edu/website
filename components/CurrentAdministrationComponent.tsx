@@ -1,39 +1,40 @@
+import { CurrentAdministration } from "@/types/models";
 import { ITranslate, useTranslate } from "@/utils/translate.util";
 import { useRouter } from "next/router";
 import React from "react";
 
-export type CurrentAdministrationProps = {
-  position: string;
-  name: string;
-  birthdate: string;
-  degree: string;
-  email: string;
-  phone: string;
-  qualifications: string[];
-  socials: { icon: string; url: string }[];
-};
+// export type CurrentAdministrationProps = {
+//   position: string;
+//   name: string;
+//   birthdate: string;
+//   degree: string;
+//   email: string;
+//   phone: string;
+//   qualifications: string[];
+//   socials: { icon: string; url: string }[];
+// };
 
-export const currentAdministrationProps: CurrentAdministrationProps = {
-  name: "أحمد عبد القادر آدم",
-  degree: "بروفيسر",
-  birthdate: "10 / 6 / 1963",
-  email: "ahmed@gmail.com",
-  phone: "249918199724+",
-  position: "مدير الجامعة",
-  qualifications: [
-    " دكتوراه - جامعة هوكايدو - اليابان.",
-    " ماجيستير جامعة الخرطوم - السودان.",
-    " بكالريوس - جامعة جوبا - السودان.",
-  ],
-  socials: [
-    { icon: "ri-facebook-fill", url: "#" },
-    { icon: "ri-twitter-fill", url: "#" },
-    { icon: "ri-linkedin-fill", url: "#" },
-    { icon: "ri-google-fill", url: "#" },
-  ],
-};
+// export const currentAdministrationProps: CurrentAdministrationProps = {
+//   name: "أحمد عبد القادر آدم",
+//   degree: "بروفيسر",
+//   birthdate: "10 / 6 / 1963",
+//   email: "ahmed@gmail.com",
+//   phone: "249918199724+",
+//   position: "مدير الجامعة",
+//   qualifications: [
+//     " دكتوراه - جامعة هوكايدو - اليابان.",
+//     " ماجيستير جامعة الخرطوم - السودان.",
+//     " بكالريوس - جامعة جوبا - السودان.",
+//   ],
+//   socials: [
+//     { icon: "ri-facebook-fill", url: "#" },
+//     { icon: "ri-twitter-fill", url: "#" },
+//     { icon: "ri-linkedin-fill", url: "#" },
+//     { icon: "ri-google-fill", url: "#" },
+//   ],
+// };
 
-function CurrentAdministration({
+function CurrentAdministrationComponent({
   position,
   name,
   birthdate,
@@ -42,7 +43,7 @@ function CurrentAdministration({
   phone,
   qualifications,
   socials,
-}: CurrentAdministrationProps) {
+}: CurrentAdministration) {
   const { locale } = useRouter();
 
   const lng = locale == "ar" ? "ar" : "en";
@@ -57,20 +58,20 @@ function CurrentAdministration({
               <div className="instructor-image">
                 <img src="/images/user.png" alt="Image" />
                 <div className="content">
-                  <h4>{name}</h4>
+                  <h4>{name?.[lng]}</h4>
                 </div>
               </div>
             </div>
             <div className="col-lg-8">
               <div className="instructor-content">
                 <div className="name">
-                  <h3>{position}</h3>
+                  <h3>{position?.[lng]}</h3>
                   <div className="quick-contact">
                     <ul className="row">
                       <li className="col-md-6">
                         <i className="ri-user-line"></i>
                         <span> {t("name")}:</span>
-                        <div className="content">{name}</div>
+                        <div className="content">{name?.[lng]}</div>
                       </li>
                       <li className="col-md-6">
                         <i className="ri-calendar-2-line"></i>
@@ -80,7 +81,7 @@ function CurrentAdministration({
                       <li className="col-md-6">
                         <i className="ri-contacts-book-2-line"></i>
                         <span>{t("degree")}:</span>
-                        <div className="content">{degree}</div>
+                        <div className="content">{degree?.[lng]}</div>
                       </li>
                       <li className="col-md-6">
                         <i className="ri-mail-line"></i>
@@ -99,7 +100,7 @@ function CurrentAdministration({
                       <li className="col-md-6">
                         <i className="ri-shopping-bag-line"></i>
                         <span>{t("position")}:</span>
-                        <div className="content">{position}</div>
+                        <div className="content">{position?.[lng]}</div>
                       </li>
                     </ul>
                   </div>
@@ -109,10 +110,10 @@ function CurrentAdministration({
                       <div className="row">
                         <div className="col-lg-12">
                           <ul>
-                            {qualifications.map((q) => (
-                              <li key={q}>
+                            {qualifications.map((q, x) => (
+                              <li key={`qualifications-${x}`}>
                                 <i className="ri-checkbox-circle-line"></i>
-                                {q}
+                                {q?.[lng]}
                               </li>
                             ))}
                           </ul>
@@ -143,7 +144,7 @@ function CurrentAdministration({
   );
 }
 
-export default CurrentAdministration;
+export default CurrentAdministrationComponent;
 
 const translate: ITranslate = {
   name: {

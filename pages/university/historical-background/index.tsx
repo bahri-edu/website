@@ -4,6 +4,7 @@ import RelatedDownload from "@/components/RelatedDownload";
 import { HistoricalBackground } from "@/types/models";
 import { ITranslate, useTranslate } from "@/utils/translate.util";
 import { httpClient } from "@/utils/util.http";
+import Head from "next/head";
 import { useRouter } from "next/router";
 import React from "react";
 
@@ -28,6 +29,9 @@ function HistoricalBackground({
   const t = useTranslate(translate, locale);
   return (
     <>
+      <Head>
+        <title>{t("title")}</title>
+      </Head>
       <AboutBanner
         title={t("HistoricalBackground")}
         breadcrumbs={[t("HistoricalBackground")]}

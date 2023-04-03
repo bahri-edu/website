@@ -1,7 +1,7 @@
 import AboutBanner from "@/components/AboutBanner";
 import CurrentAdministration, {
   currentAdministrationProps,
-} from "@/components/CurrentAdministration";
+} from "@/components/CurrentAdministrationComponent";
 import { ITranslate, useTranslate } from "@/utils/translate.util";
 import { useRouter } from "next/router";
 import React from "react";

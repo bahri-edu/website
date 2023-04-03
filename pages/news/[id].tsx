@@ -2,7 +2,7 @@ import AboutBanner from "@/components/AboutBanner";
 import RelatedNews from "@/components/RelatedNews";
 import { News } from "@/types/models";
 import { ITranslate, useTranslate } from "@/utils/translate.util";
-import { httpClient } from "@/utils/util.http";
+import { httpClient, uploadFileUrl } from "@/utils/util.http";
 import { GetServerSideProps } from "next";
 import { useRouter } from "next/router";
 import React from "react";
@@ -14,11 +14,12 @@ export async function getServerSideProps(context: any) {
     props: {
       title: post?.title,
       description: post?.description,
+      images: post?.images,
     },
   };
 }
 
-function NewsDetails({ title, description }: News) {
+function NewsDetails({ title, description, images }: News) {
   const { locale } = useRouter();
 
   const lng = locale == "ar" ? "ar" : "en";
@@ -35,7 +36,11 @@ function NewsDetails({ title, description }: News) {
               <div className="news-details">
                 <div className="news-simple-card">
                   <div className="image">
-                    <img src="/images/bah2.jpg" alt="Image" />
+                    {images && images?.length > 0 ? (
+                      <img src={uploadFileUrl + images[0]} alt="Image" />
+                    ) : (
+                      <img src="/images/bah2.jpg" alt="Image" />
+                    )}
                   </div>
 
                   <h2>{title?.[lng]}</h2>
@@ -45,12 +50,12 @@ function NewsDetails({ title, description }: News) {
             </div>
             <div className="col-lg-4">
               <div className="serch-content">
-                <h3>البحث</h3>
+                <h3>{t("search")}</h3>
                 <div className="form-group">
                   <input
                     type="text"
                     className="form-control"
-                    placeholder="إبحث هنا"
+                    placeholder={t("searchPlaceholder")}
                   />
                   <button type="submit" className="src-btn">
                     <i className="flaticon-search"></i>
@@ -58,21 +63,23 @@ function NewsDetails({ title, description }: News) {
                 </div>
               </div>
               <div className="category-list">
-                <h3>الفئات</h3>
+                <h3>{t("categories")}</h3>
                 <ul>
                   <li>
                     <a href="#">
-                      أخبار التسجيل<i className="ri-arrow-drop-right-fill"></i>
+                      {t("categ1")} <i className="ri-arrow-drop-right-fill"></i>
                     </a>
                   </li>
                   <li>
                     <a href="#">
-                      أخبار الجامعة<i className="ri-arrow-drop-right-fill"></i>
+                      {t("categ2")}
+                      <i className="ri-arrow-drop-right-fill"></i>
                     </a>
                   </li>
                   <li>
                     <a href="#">
-                      الوظائف<i className="ri-arrow-drop-right-fill"></i>
+                      {t("categ3")}
+                      <i className="ri-arrow-drop-right-fill"></i>
                     </a>
                   </li>
                 </ul>
@@ -100,5 +107,29 @@ const translate: ITranslate = {
   details: {
     en: "News details", // الأخبار
     ar: "تفاصيل الأخبار",
+  },
+  search: {
+    en: "Search",
+    ar: "البحث",
+  },
+  searchPlaceholder: {
+    en: "search here",
+    ar: "إبحث هنا",
+  },
+  categories: {
+    en: "Categories",
+    ar: "الفئات",
+  },
+  categ1: {
+    en: "Registration news",
+    ar: "أخبار التسجيل",
+  },
+  categ2: {
+    en: "University News",
+    ar: "أخبار الجامعة",
+  },
+  categ3: {
+    ar: "الوظائف",
+    en: "careers",
   },
 };

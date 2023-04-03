@@ -1,12 +1,12 @@
 import AboutBanner from "@/components/AboutBanner";
 import CurrentAdministration, {
   currentAdministrationProps,
-} from "@/components/CurrentAdministration";
+} from "@/components/CurrentAdministrationComponent";
 import { ITranslate, useTranslate } from "@/utils/translate.util";
 import { useRouter } from "next/router";
 import React from "react";
 
-function ViceChancellor() {
+function SecretaryOfScientificAffairs() {
   const { locale } = useRouter();
 
   const lng = locale == "ar" ? "ar" : "en";
@@ -26,13 +26,12 @@ function ViceChancellor() {
   );
 }
 
-export default ViceChancellor;
+export default SecretaryOfScientificAffairs;
 const translate: ITranslate = {
   title: {
-    ar: "مدير الجامعة",
-    en: "Vice Chancellor",
+    ar: " أمين الشؤون العلمية",
+    en: "Secretary of Scientific Affairs",
   },
-
   currentAdministration: {
     ar: "إدارة الجامعة الحالية",
     en: "Current Administration",

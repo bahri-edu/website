@@ -1,6 +1,6 @@
 import { News } from "@/types/models";
 import { ITranslate, useTranslate } from "@/utils/translate.util";
-import { httpClient } from "@/utils/util.http";
+import { httpClient, uploadFileUrl } from "@/utils/util.http";
 import Link from "next/link";
 import { useRouter } from "next/router";
 import React, { useEffect, useState } from "react";
@@ -32,7 +32,11 @@ function RelatedNews() {
           <div className="related-post-content">
             <Link href={`/news/${n.id}`}>
               <a>
-                <img src="/images/bah2.jpg" alt="Image" />
+                {n?.images && n?.images?.length > 0 ? (
+                  <img src={uploadFileUrl + n.images[0]} alt="Image" />
+                ) : (
+                  <img src="/images/bah2.jpg" alt="Image" />
+                )}
               </a>
             </Link>
 

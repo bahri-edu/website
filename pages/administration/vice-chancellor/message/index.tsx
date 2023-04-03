@@ -1,16 +1,34 @@
 import AboutBanner from "@/components/AboutBanner";
+import AdministratorSidebar from "@/components/AdministratorSidebar";
+import { ViceChancellorMessage } from "@/types/models";
 import { ITranslate, useTranslate } from "@/utils/translate.util";
+import { httpClient } from "@/utils/util.http";
+import Head from "next/head";
 import { useRouter } from "next/router";
 import React from "react";
 
-function Message() {
+export async function getServerSideProps() {
+  const messages = await httpClient(`vice-chancellor/message`);
+  return {
+    props: {
+      messages,
+    },
+  };
+}
+
+function Message({ messages }: { messages: ViceChancellorMessage[] }) {
   const { locale } = useRouter();
 
   const lng = locale == "ar" ? "ar" : "en";
 
   const t = useTranslate(translate, locale);
+
+  const [message] = messages;
   return (
     <>
+      <Head>
+        <title>{t("title")}</title>
+      </Head>
       <AboutBanner
         title={t("title")}
         breadcrumbs={[t("viceChancellor"), t("title")]}
@@ -21,100 +39,16 @@ function Message() {
           <div className="row">
             <div className="col-lg-8">
               <div className="condition-content">
-                <h2>{t("title")}</h2>
-                <p>{t("message")}</p>
+                <h2>{message?.title?.[lng]}</h2>
+                {message?.descriptions?.map((des, x) => (
+                  <p key={`ViceChancellorMessageDescription${x}`}>
+                    {des?.[lng]}
+                  </p>
+                ))}
               </div>
             </div>
             <div className="col-lg-4">
-              <div className="condition-right-content pl-20">
-                <div className="category-list">
-                  <h3>عن الإدارة</h3>
-                  <ul>
-                    <li>
-                      <a href="#">
-                        مكتب مدير الجامعة
-                        <i className="ri-arrow-drop-right-fill"></i>
-                      </a>
-                    </li>
-                    <li>
-                      <a href="#">
-                        رسالة مدير الجامعة
-                        <i className="ri-arrow-drop-right-fill"></i>
-                      </a>
-                    </li>
-                    <li>
-                      <a href="#">
-                        السيرة الذاتية لمدير الجامعة
-                        <i className="ri-arrow-drop-right-fill"></i>
-                      </a>
-                    </li>
-                    <li>
-                      <a href="#">
-                        مدير الجامعة<i className="ri-arrow-drop-right-fill"></i>
-                      </a>
-                    </li>
-                    <li>
-                      <a href="#">
-                        نائب مدير الجامعة
-                        <i className="ri-arrow-drop-right-fill"></i>
-                      </a>
-                    </li>
-                    <li>
-                      <a href="#">
-                        وكيل الجامعة<i className="ri-arrow-drop-right-fill"></i>
-                      </a>
-                    </li>
-                    <li>
-                      <a href="#">
-                        أمين الشؤون العلمية
-                        <i className="ri-arrow-drop-right-fill"></i>
-                      </a>
-                    </li>
-                    <li>
-                      <a href="#">
-                        أمانة الشؤون العلمية
-                        <i className="ri-arrow-drop-right-fill"></i>
-                      </a>
-                    </li>
-                    <li>
-                      <a href="#">
-                        مكتب وكيل الجامعة
-                        <i className="ri-arrow-drop-right-fill"></i>
-                      </a>
-                    </li>
-                    <li>
-                      <a href="#">
-                        إدارة الموارد البشرية
-                        <i className="ri-arrow-drop-right-fill"></i>
-                      </a>
-                    </li>
-                    <li>
-                      <a href="#">
-                        إدارة العلاقات الثقافية
-                        <i className="ri-arrow-drop-right-fill"></i>
-                      </a>
-                    </li>
-                    <li>
-                      <a href="#">
-                        الإدارة المالية
-                        <i className="ri-arrow-drop-right-fill"></i>
-                      </a>
-                    </li>
-                    <li>
-                      <a href="#">
-                        إدارة الإستثمار
-                        <i className="ri-arrow-drop-right-fill"></i>
-                      </a>
-                    </li>
-                    <li>
-                      <a href="#">
-                        وحدة الخدمات الطبية و الصحية
-                        <i className="ri-arrow-drop-right-fill"></i>
-                      </a>
-                    </li>
-                  </ul>
-                </div>
-              </div>
+              <AdministratorSidebar />
             </div>
           </div>
         </div>

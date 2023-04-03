@@ -3,6 +3,7 @@ import Odometer from "@/components/Odometer";
 import { FactAndFigure, FactType } from "@/types/models";
 import { ITranslate, useTranslate } from "@/utils/translate.util";
 import { httpClient } from "@/utils/util.http";
+import Head from "next/head";
 import { useRouter } from "next/router";
 import React from "react";
 
@@ -21,11 +22,14 @@ function FactAndFigures({ facts }: { facts: FactAndFigure[] }) {
   const lng = locale === "ar" ? "ar" : "en";
 
   const factStudent = facts.filter(({ type }) => type == FactType.STUDENT);
-  const factStaff = facts.filter(({ type }) => type == FactType.STUDENT);
+  const factStaff = facts.filter(({ type }) => type == FactType.STAFF);
 
   const t = useTranslate(translate, locale);
   return (
     <>
+      <Head>
+        <title>{t("title")}</title>
+      </Head>
       <AboutBanner title={t("title")} breadcrumbs={[t("title")]} />
 
       {/* <!-- FACTS SECTION --> */}

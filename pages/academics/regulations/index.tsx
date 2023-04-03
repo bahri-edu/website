@@ -1,12 +1,233 @@
 import AboutBanner from "@/components/AboutBanner";
+import { Translate } from "@/types/models";
+import { ITranslate, useTranslate } from "@/utils/translate.util";
+import Head from "next/head";
+import { useRouter } from "next/router";
 import React from "react";
 
+interface IRegulation {
+  title: Translate;
+  description: Translate;
+  lists: Translate[];
+}
+
+const regulations: IRegulation[] = [
+  {
+    title: {
+      ar: "اللائحة الأكاديمية لبرنامج البكالريوس",
+      en: "Academic regulations for the bachelor's program",
+    },
+    description: {
+      ar: "تهدف مديرية تنمية الموارد البشرية إلى تعزيز قيم مثل الصدق والشفافية والإنصاف والاعتراف بالتنوع الفردي وضمان الجودة والدقة والتطوير وتطبيق التكنولوجيا ذات الصلة.",
+      en: "The Human Resources Development Directorate aims to promote values such as honesty, transparency, fairness, recognition of individual diversity, quality assurance, accuracy, development and application of relevant technology.",
+    },
+    lists: [
+      {
+        ar: "استيفاء معايير الجودة تطبيق نظام موظفي المعلومات.",
+        en: "Meeting quality standards Implementing the personnel information system.",
+      },
+      {
+        ar: "الاحترام والاعتراف اعتماد حل قائم على التنظيم لمشاكل الموظفين",
+        en: "Respect and recognition Adopt an organization-based solution to employee problems.",
+      },
+      {
+        ar: "تزويد إدارة الجامعة بالنصائح ذات الصلة بإدارة الموارد البشرية",
+        en: "Providing the university administration with advice related to human resource management",
+      },
+      {
+        ar: "التقييم المنتظم لموظفي الجامعة",
+        en: "Regular evaluation of university staff",
+      },
+      {
+        ar: "تقييم احتياجات الجامعة من الموارد البشرية",
+        en: "Evaluating the university's human resources needs.",
+      },
+      {
+        ar: "تعزيز الأداء المهني والتنظيمي",
+        en: "Enhance professional and organizational performance",
+      },
+      {
+        ar: "خلق الرضا الوظيفي بين العاملين",
+        en: "Create job satisfaction among workers",
+      },
+    ],
+  },
+  {
+    title: {
+      ar: "نظام الإمتحانات",
+      en: "Examination system",
+    },
+    description: {
+      ar: "تهدف مديرية تنمية الموارد البشرية إلى تعزيز قيم مثل الصدق والشفافية والإنصاف والاعتراف بالتنوع الفردي وضمان الجودة والدقة والتطوير وتطبيق التكنولوجيا ذات الصلة.",
+      en: "The Human Resources Development Directorate aims to promote values such as honesty, transparency, fairness, recognition of individual diversity, quality assurance, accuracy, development and application of relevant technology.",
+    },
+    lists: [
+      {
+        ar: "استيفاء معايير الجودة تطبيق نظام موظفي المعلومات.",
+        en: "Meeting quality standards Implementing the personnel information system.",
+      },
+      {
+        ar: "الاحترام والاعتراف اعتماد حل قائم على التنظيم لمشاكل الموظفين",
+        en: "Respect and recognition Adopt an organization-based solution to employee problems.",
+      },
+      {
+        ar: "تزويد إدارة الجامعة بالنصائح ذات الصلة بإدارة الموارد البشرية",
+        en: "Providing the university administration with advice related to human resource management",
+      },
+      {
+        ar: "التقييم المنتظم لموظفي الجامعة",
+        en: "Regular evaluation of university staff",
+      },
+      {
+        ar: "تقييم احتياجات الجامعة من الموارد البشرية",
+        en: "Evaluating the university's human resources needs.",
+      },
+      {
+        ar: "تعزيز الأداء المهني والتنظيمي",
+        en: "Enhance professional and organizational performance",
+      },
+      {
+        ar: "خلق الرضا الوظيفي بين العاملين",
+        en: "Create job satisfaction among workers",
+      },
+    ],
+  },
+  {
+    title: {
+      ar: "لائحة التجميد و الإستقالة",
+      en: "List of freezing and resignation",
+    },
+    description: {
+      ar: "تهدف مديرية تنمية الموارد البشرية إلى تعزيز قيم مثل الصدق والشفافية والإنصاف والاعتراف بالتنوع الفردي وضمان الجودة والدقة والتطوير وتطبيق التكنولوجيا ذات الصلة.",
+      en: "The Human Resources Development Directorate aims to promote values such as honesty, transparency, fairness, recognition of individual diversity, quality assurance, accuracy, development and application of relevant technology.",
+    },
+    lists: [
+      {
+        ar: "استيفاء معايير الجودة تطبيق نظام موظفي المعلومات.",
+        en: "Meeting quality standards Implementing the personnel information system.",
+      },
+      {
+        ar: "الاحترام والاعتراف اعتماد حل قائم على التنظيم لمشاكل الموظفين",
+        en: "Respect and recognition Adopt an organization-based solution to employee problems.",
+      },
+      {
+        ar: "تزويد إدارة الجامعة بالنصائح ذات الصلة بإدارة الموارد البشرية",
+        en: "Providing the university administration with advice related to human resource management",
+      },
+      {
+        ar: "التقييم المنتظم لموظفي الجامعة",
+        en: "Regular evaluation of university staff",
+      },
+      {
+        ar: "تقييم احتياجات الجامعة من الموارد البشرية",
+        en: "Evaluating the university's human resources needs.",
+      },
+      {
+        ar: "تعزيز الأداء المهني والتنظيمي",
+        en: "Enhance professional and organizational performance",
+      },
+      {
+        ar: "خلق الرضا الوظيفي بين العاملين",
+        en: "Create job satisfaction among workers",
+      },
+    ],
+  },
+  {
+    title: {
+      ar: "لائحة تحويل الطلاب",
+      en: "Student transfer list",
+    },
+    description: {
+      ar: "تهدف مديرية تنمية الموارد البشرية إلى تعزيز قيم مثل الصدق والشفافية والإنصاف والاعتراف بالتنوع الفردي وضمان الجودة والدقة والتطوير وتطبيق التكنولوجيا ذات الصلة.",
+      en: "The Human Resources Development Directorate aims to promote values such as honesty, transparency, fairness, recognition of individual diversity, quality assurance, accuracy, development and application of relevant technology.",
+    },
+    lists: [
+      {
+        ar: "استيفاء معايير الجودة تطبيق نظام موظفي المعلومات.",
+        en: "Meeting quality standards Implementing the personnel information system.",
+      },
+      {
+        ar: "الاحترام والاعتراف اعتماد حل قائم على التنظيم لمشاكل الموظفين",
+        en: "Respect and recognition Adopt an organization-based solution to employee problems.",
+      },
+      {
+        ar: "تزويد إدارة الجامعة بالنصائح ذات الصلة بإدارة الموارد البشرية",
+        en: "Providing the university administration with advice related to human resource management",
+      },
+      {
+        ar: "التقييم المنتظم لموظفي الجامعة",
+        en: "Regular evaluation of university staff",
+      },
+      {
+        ar: "تقييم احتياجات الجامعة من الموارد البشرية",
+        en: "Evaluating the university's human resources needs.",
+      },
+      {
+        ar: "تعزيز الأداء المهني والتنظيمي",
+        en: "Enhance professional and organizational performance",
+      },
+      {
+        ar: "خلق الرضا الوظيفي بين العاملين",
+        en: "Create job satisfaction among workers",
+      },
+    ],
+  },
+  {
+    title: {
+      ar: "لائحة المصروفات ورسوم التسجيل",
+      en: "List of expenses and registration fees",
+    },
+    description: {
+      ar: "تهدف مديرية تنمية الموارد البشرية إلى تعزيز قيم مثل الصدق والشفافية والإنصاف والاعتراف بالتنوع الفردي وضمان الجودة والدقة والتطوير وتطبيق التكنولوجيا ذات الصلة.",
+      en: "The Human Resources Development Directorate aims to promote values such as honesty, transparency, fairness, recognition of individual diversity, quality assurance, accuracy, development and application of relevant technology.",
+    },
+    lists: [
+      {
+        ar: "استيفاء معايير الجودة تطبيق نظام موظفي المعلومات.",
+        en: "Meeting quality standards Implementing the personnel information system.",
+      },
+      {
+        ar: "الاحترام والاعتراف اعتماد حل قائم على التنظيم لمشاكل الموظفين",
+        en: "Respect and recognition Adopt an organization-based solution to employee problems.",
+      },
+      {
+        ar: "تزويد إدارة الجامعة بالنصائح ذات الصلة بإدارة الموارد البشرية",
+        en: "Providing the university administration with advice related to human resource management",
+      },
+      {
+        ar: "التقييم المنتظم لموظفي الجامعة",
+        en: "Regular evaluation of university staff",
+      },
+      {
+        ar: "تقييم احتياجات الجامعة من الموارد البشرية",
+        en: "Evaluating the university's human resources needs.",
+      },
+      {
+        ar: "تعزيز الأداء المهني والتنظيمي",
+        en: "Enhance professional and organizational performance",
+      },
+      {
+        ar: "خلق الرضا الوظيفي بين العاملين",
+        en: "Create job satisfaction among workers",
+      },
+    ],
+  },
+];
+
 function Regulations() {
+  const { locale } = useRouter();
+
+  const lng = locale == "ar" ? "ar" : "en";
+
+  const t = useTranslate(translate, locale);
   return (
     <>
+      <Head>
+        <title>{t("title")}</title>
+      </Head>
       <AboutBanner
-        title="اللوائح و القوانين"
-        breadcrumbs={["الأكاديمية", "اللوائح و القوانين"]}
+        title={t("title")}
+        breadcrumbs={[t("academic"), t("title")]}
       />
 
       <div className="terms-condition-area ruels pt-100 pb-70">
@@ -14,7 +235,7 @@ function Regulations() {
           <div className="row" style={{ justifyContent: "center" }}>
             <div className="col-lg-12">
               <div className="condition-content">
-                <h2>اللوائح و القوانين</h2>
+                <h2>{t("title")}</h2>
               </div>
 
               <div className="description two">
@@ -27,139 +248,67 @@ function Regulations() {
                           id="nav-tab"
                           role="tablist"
                         >
-                          <button
-                            className="nav-link active"
-                            id="nav-overview-tab"
-                            data-bs-toggle="tab"
-                            data-bs-target="#nav-overview"
-                            type="button"
-                            role="tab"
-                            aria-controls="nav-overview"
-                            aria-selected="true"
-                          >
-                            اللائحة الأكاديمية لبرنامج البكالريوس
-                          </button>
-                          <button
-                            className="nav-link"
-                            id="nav-curriculum-tab"
-                            data-bs-toggle="tab"
-                            data-bs-target="#nav-curriculum"
-                            type="button"
-                            role="tab"
-                            aria-controls="nav-curriculum"
-                            aria-selected="false"
-                            tabIndex={-1}
-                          >
-                            نظام الإمتحانات
-                          </button>
-                          <button
-                            className="nav-link"
-                            id="nav-instructor-tab"
-                            data-bs-toggle="tab"
-                            data-bs-target="#nav-instructor"
-                            type="button"
-                            role="tab"
-                            aria-controls="nav-instructor"
-                            aria-selected="false"
-                            tabIndex={-1}
-                          >
-                            لائحة التجميد والإستقالة
-                          </button>
-                          <button
-                            className="nav-link"
-                            id="nav-reviews-tab"
-                            data-bs-toggle="tab"
-                            data-bs-target="#nav-reviews"
-                            type="button"
-                            role="tab"
-                            aria-controls="nav-reviews"
-                            aria-selected="false"
-                            tabIndex={-1}
-                          >
-                            لائحة تحويل الطلاب
-                          </button>
-                          <button
-                            className="nav-link"
-                            id="nav-reviews-tab"
-                            data-bs-toggle="tab"
-                            data-bs-target="#nav-reviews2"
-                            type="button"
-                            role="tab"
-                            aria-controls="nav-reviews"
-                            aria-selected="false"
-                            tabIndex={-1}
-                          >
-                            لائحة المصروفات ورسوم التسجيل
-                          </button>
+                          {regulations.map((reg, x) => (
+                            <button
+                              key={`button-tab-${x}`}
+                              className={`nav-link ${x === 0 ? " active" : ""}`}
+                              id={`nav-${x}-tab`}
+                              data-bs-toggle="tab"
+                              data-bs-target={`#nav-${x}`}
+                              type="button"
+                              role="tab"
+                              aria-controls={`nav-${x}`}
+                              aria-selected="true"
+                            >
+                              {reg?.title[lng]}
+                            </button>
+                          ))}
                         </div>
                       </nav>
                     </div>
                     <div className="col-lg-8">
                       <div className="tab-content" id="nav-tabContent">
-                        <div
-                          className="tab-pane fade show active"
-                          id="nav-overview"
-                          role="tabpanel"
-                          aria-labelledby="nav-overview-tab"
-                        >
-                          <div className="overview">
-                            <div className="learn">
-                              <h3>
-                                <i className="ri-information-line"></i> اللائحة
-                                الأكاديمية لبرنامج البكالريوس
-                              </h3>
-                              <p>
-                                تهدف مديرية تنمية الموارد البشرية إلى تعزيز قيم
-                                مثل الصدق والشفافية والإنصاف والاعتراف بالتنوع
-                                الفردي وضمان الجودة والدقة والتطوير وتطبيق
-                                التكنولوجيا ذات الصلة.
-                              </p>
+                        {regulations.map((reg, x) => (
+                          <div
+                            key={`tab-content-key-${x}`}
+                            className={`tab-pane fade show ${
+                              x === 0 ? " active" : ""
+                            }`}
+                            id={`nav-${x}`}
+                            role="tabpanel"
+                            aria-labelledby={`nav-${x}-tab`}
+                          >
+                            <div className="overview">
+                              <div className="learn">
+                                <h3>
+                                  <i className="ri-information-line"></i>{" "}
+                                  {reg?.title[lng]}
+                                </h3>
+                                <p>{reg?.description[lng]}</p>
+                              </div>
                             </div>
-                          </div>
 
-                          <div className="overview">
-                            <div className="learn">
-                              <h3>
-                                <i className="ri-file-list-2-line"></i> اللوائح
-                              </h3>
-                              <div className="overview">
-                                <div className="overview-box px-37">
-                                  <h4>
-                                    استيفاء معايير الجودة تطبيق نظام موظفي
-                                    المعلومات.
-                                  </h4>
-                                </div>
-                                <div className="overview-box px-37">
-                                  <h4>
-                                    الاحترام والاعتراف اعتماد حل قائم على
-                                    التنظيم لمشاكل الموظفين.
-                                  </h4>
-                                </div>
-                                <div className="overview-box px-37">
-                                  <h4>
-                                    تزويد إدارة الجامعة بالنصائح ذات الصلة
-                                    بإدارة الموارد البشرية.
-                                  </h4>
-                                </div>
-                                <div className="overview-box px-37">
-                                  <h4>التقييم المنتظم لموظفي الجامعة.</h4>
-                                </div>
-                                <div className="overview-box px-37">
-                                  <h4>
-                                    تقييم احتياجات الجامعة من الموارد البشرية.
-                                  </h4>
-                                </div>
-                                <div className="overview-box px-37">
-                                  <h4>تعزيز الأداء المهني والتنظيمي.</h4>
-                                </div>
-                                <div className="overview-box px-37">
-                                  <h4> خلق الرضا الوظيفي بين العاملين.</h4>
+                            <div className="overview">
+                              <div className="learn">
+                                <h3>
+                                  <i className="ri-file-list-2-line"></i>{" "}
+                                  {t("regulations")}
+                                </h3>
+                                <div className="overview">
+                                  {reg.lists.map((lis, x) => (
+                                    <div
+                                      key={`overview-list-${x}`}
+                                      className="overview-box px-37"
+                                    >
+                                      <h4>{lis[lng]}</h4>
+                                    </div>
+                                  ))}
                                 </div>
                               </div>
                             </div>
                           </div>
-                        </div>
-                        <div
+                        ))}
+                        {/* <div
                           className="tab-pane fade"
                           id="nav-curriculum"
                           role="tabpanel"
@@ -413,7 +562,7 @@ function Regulations() {
                               </div>
                             </div>
                           </div>
-                        </div>
+                        </div> */}
                       </div>
                     </div>
                   </div>
@@ -428,3 +577,18 @@ function Regulations() {
 }
 
 export default Regulations;
+
+const translate: ITranslate = {
+  title: {
+    ar: "اللوائح و القوانين",
+    en: "Regulations and laws",
+  },
+  regulations: {
+    ar: "اللوائح",
+    en: "Regulations",
+  },
+  academic: {
+    ar: "الأكاديمية",
+    en: "Academics",
+  },
+};

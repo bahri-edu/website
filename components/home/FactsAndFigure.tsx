@@ -1,4 +1,4 @@
-import { FactAndFigure } from "@/types/models";
+import { FactAndFigure, FactType } from "@/types/models";
 import { httpClient } from "@/utils/util.http";
 import React, { useEffect, useState } from "react";
 import { ITranslate, useTranslate } from "@/utils/translate.util";
@@ -16,7 +16,9 @@ function FactsAndFigure() {
   useEffect(() => {
     (async () => {
       const fas = await httpClient("fact-and-figure");
-      setFacts(fas);
+
+      const factStaff = fas.filter((f: any) => f.type == FactType.STAFF);
+      setFacts(factStaff);
     })();
   }, []);
 

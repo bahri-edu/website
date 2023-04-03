@@ -1,7 +1,9 @@
+import { UniversityAdministration } from "@/types/models";
 import { isActive, ITranslate, useTranslate } from "@/utils/translate.util";
+import { httpClient } from "@/utils/util.http";
 import Link from "next/link";
 import { useRouter } from "next/router";
-import React from "react";
+import React, { useEffect, useState } from "react";
 
 function AdministrationItem({
   pathname,
@@ -11,6 +13,24 @@ function AdministrationItem({
   locale: string | undefined;
 }) {
   const t = useTranslate(translate, locale);
+
+  const lng = locale === "ar" ? "ar" : "en";
+
+  const [universityAdministrations, setUniversityAdministrations] = useState<
+    UniversityAdministration[]
+  >([]);
+
+  useEffect(() => {
+    (async function () {
+      try {
+        const res = await httpClient("university-administration");
+
+        setUniversityAdministrations(res);
+      } catch (error) {
+        setUniversityAdministrations([]);
+      }
+    })();
+  }, []);
 
   return (
     <li className="nav-item">
@@ -77,7 +97,7 @@ function AdministrationItem({
             </li>
             <li className="nav-item">
               <Link
-                href="/administration/current-administration/the-principal"
+                href="/administration/current-administration/principal"
                 className="nav-link"
               >
                 {t("principal")}
@@ -99,87 +119,16 @@ function AdministrationItem({
             {t("universityDepartment")}
           </a>
           <ul className="dropdown-menu tow">
-            <li className="nav-item">
-              <Link
-                href="/administration/university-administrations/academic-affairs"
-                className="nav-link"
-              >
-                {t("affairsSecretary")}
-              </Link>
-            </li>
-            <li className="nav-item">
-              <Link
-                href="/administration/university-administrations/principle-office"
-                className="nav-link"
-              >
-                {t("Office")}
-              </Link>
-            </li>
-            <li className="nav-item">
-              <Link
-                href="/administration/university-administrations/human-resources"
-                className="nav-link"
-              >
-                {t("HumanResource")}
-              </Link>
-            </li>
-
-            <li className="nav-item">
-              <Link
-                href="/administration/university-administrations/cultural-relations-and-information"
-                className="nav-link"
-              >
-                {t("culturalRelations")}
-              </Link>
-            </li>
-            <li className="nav-item">
-              <Link
-                href="/administration/university-administrations/financial-controller-office"
-                className="nav-link"
-              >
-                {t("financialManagement")}
-              </Link>
-            </li>
-            <li className="nav-item">
-              <Link
-                href="/administration/university-administrations/investment-directorate"
-                className="nav-link"
-              >
-                {t("investmentManagement")}
-              </Link>
-            </li>
-            <li className="nav-item">
-              <Link
-                href="/administration/university-administrations/quality-management-and-development"
-                className="nav-link"
-              >
-                {t("qualityManagement")}
-              </Link>
-            </li>
-            <li className="nav-item">
-              <Link
-                href="/administration/university-administrations/services-management"
-                className="nav-link"
-              >
-                {t("servicesManagement")}
-              </Link>
-            </li>
-            <li className="nav-item">
-              <Link
-                href="/administration/university-administrations/medical-and-health-services-unit"
-                className="nav-link"
-              >
-                {t("healthUnit")}
-              </Link>
-            </li>
-            <li className="nav-item">
-              <Link
-                href="/administration/university-administrations/university-police"
-                className="nav-link"
-              >
-                {t("guard")}
-              </Link>
-            </li>
+            {universityAdministrations.map((unv, x) => (
+              <li className="nav-item" key={`universityAdministrations-${x}`}>
+                <Link
+                  href={`/administration/university-administrations/${unv?.slug}`}
+                  className="nav-link"
+                >
+                  {unv?.unit?.[lng]}
+                </Link>
+              </li>
+            ))}
           </ul>
         </li>
       </ul>
@@ -203,7 +152,7 @@ const translate: ITranslate = {
     ar: "مكتب مدير الجامعة",
   },
   viceChancellorMessage: {
-    en: "vice-chancellor vMessage",
+    en: "vice-chancellor Message",
     ar: " رسالة مدير الجامعة",
   },
   viceChancellorCv: {

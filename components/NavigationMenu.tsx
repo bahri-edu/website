@@ -81,7 +81,7 @@ function NavigationMenu() {
                 onClick={() => changeLanguage("en")}
                 style={{ cursor: "pointer" }}
               >
-                {t("language")}
+                English
               </span>
             ) : (
               <span
@@ -89,7 +89,7 @@ function NavigationMenu() {
                 onClick={() => changeLanguage("ar")}
                 style={{ cursor: "pointer" }}
               >
-                {t("language")}
+                عربي
               </span>
             )}
           </div>
@@ -142,7 +142,7 @@ function NavigationMenu() {
                       onClick={() => changeLanguage("en")}
                       style={{ cursor: "pointer" }}
                     >
-                      {t("language")}
+                      English
                       <i className="ri-globe-line"></i>
                     </a>
                   ) : (
@@ -150,7 +150,7 @@ function NavigationMenu() {
                       onClick={() => changeLanguage("ar")}
                       style={{ cursor: "pointer" }}
                     >
-                      {t("language")}
+                      العربية
                       <i className="ri-globe-line"></i>
                     </a>
                   )}
