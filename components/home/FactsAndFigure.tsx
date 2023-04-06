@@ -3,6 +3,7 @@ import { httpClient } from "@/utils/util.http";
 import React, { useEffect, useState } from "react";
 import { ITranslate, useTranslate } from "@/utils/translate.util";
 import { useRouter } from "next/router";
+import Skeleton from "react-loading-skeleton";
 
 function FactsAndFigure() {
   const [facts, setFacts] = useState<FactAndFigure[]>([]);
@@ -32,29 +33,45 @@ function FactsAndFigure() {
           </div>
           <div className="counter-area">
             <div className="row">
-              {facts?.map((item) => (
-                <div key={item?.id} className="col-xl col-md-6">
-                  <div className="counter-card">
-                    <h1
-                      style={{
-                        display: "flex",
-                        alignItems: "center",
-                        justifyContent: "center",
-                        gap: "2px",
-                      }}
-                    >
-                      <span
-                        className="odometer odometer-auto-theme"
-                        data-count="4981"
+              {facts.length ? (
+                facts.map((item) => (
+                  <div key={item?.id} className="col-xl col-md-6">
+                    <div className="counter-card">
+                      <h1
+                        style={{
+                          display: "flex",
+                          alignItems: "center",
+                          justifyContent: "center",
+                          gap: "2px",
+                        }}
                       >
-                        <div className="odometer-inside">{item?.count}</div>
-                      </span>
-                      <span className="target">+</span>
-                    </h1>
-                    <p>{item?.description?.[lng]}</p>
+                        <span
+                          className="odometer odometer-auto-theme"
+                          data-count="4981"
+                        >
+                          <div className="odometer-inside">{item?.count}</div>
+                        </span>
+                        <span className="target">+</span>
+                      </h1>
+                      <p>{item?.description?.[lng]}</p>
+                    </div>
                   </div>
+                ))
+              ) : (
+                <div
+                  style={{
+                    display: "flex",
+                    gap: "7px",
+                  }}
+                >
+                  <Skeleton inline height={200} width={200} />
+                  <Skeleton inline height={200} width={200} />
+                  <Skeleton inline height={200} width={200} />
+                  <Skeleton inline height={200} width={200} />
+                  <Skeleton inline height={200} width={200} />
+                  <Skeleton inline height={200} width={200} />
                 </div>
-              ))}
+              )}
             </div>
           </div>
         </div>

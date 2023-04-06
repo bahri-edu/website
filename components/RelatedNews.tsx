@@ -1,4 +1,4 @@
-import { News } from "@/types/models";
+import { News, NewsResponse } from "@/types/models";
 import { ITranslate, useTranslate } from "@/utils/translate.util";
 import { httpClient, uploadFileUrl } from "@/utils/util.http";
 import Link from "next/link";
@@ -17,8 +17,8 @@ function RelatedNews() {
   useEffect(() => {
     (async function () {
       try {
-        const ns = await httpClient("news?limit=3");
-        setNews(ns);
+        const ns: NewsResponse = await httpClient("news?limit=5");
+        setNews(ns.data);
       } catch (error) {
         setNews([]);
       }

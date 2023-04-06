@@ -1,4 +1,5 @@
 import type { AppProps } from "next/app";
+import NextNProgress from "nextjs-progressbar";
 
 import "../styles/globals.css";
 import "../styles/flaticon.css";
@@ -12,6 +13,7 @@ import "../styles/owl.theme.default.min.css";
 import "../styles/moduls/Slider.module.css";
 import "swiper/css";
 import "swiper/css/navigation";
+import "react-loading-skeleton/dist/skeleton.css";
 
 import "bootstrap/dist/css/bootstrap.min.css";
 import { useEffect } from "react";
@@ -28,6 +30,13 @@ export default function App({ Component, pageProps }: AppProps) {
 
   return (
     <>
+      <NextNProgress
+        color="#00421d"
+        startPosition={0.3}
+        stopDelayMs={200}
+        height={7}
+        showOnShallow={true}
+      />
       <TopHeader />
       <NavigationMenu />
       <Component {...pageProps} />

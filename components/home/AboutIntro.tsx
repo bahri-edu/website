@@ -1,5 +1,6 @@
 import { ITranslate, useTranslate } from "@/utils/translate.util";
 import { httpClient } from "@/utils/util.http";
+import Link from "next/link";
 import { useRouter } from "next/router";
 import React, { useEffect } from "react";
 
@@ -36,10 +37,12 @@ function AboutIntro() {
                 <h2>{t("title")}</h2>
                 <p>{t("text")}</p>
               </div>
-              <a href="#" className="default-btn btn">
-                {t("readMore")}
-                <i className="flaticon-next"></i>
-              </a>
+              <Link href="/university/vision-and-mission">
+                <a href="#" className="default-btn btn">
+                  {t("readMore")}
+                  <i className="flaticon-next"></i>
+                </a>
+              </Link>
             </div>
           </div>
           <div

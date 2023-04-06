@@ -3,6 +3,7 @@ import { ITranslate, useTranslate } from "@/utils/translate.util";
 import { httpClient } from "@/utils/util.http";
 import { useRouter } from "next/router";
 import React, { useEffect, useState } from "react";
+import Skeleton from "react-loading-skeleton";
 
 function ElServices() {
   const [services, setServices] = useState<EService[]>([]);
@@ -26,22 +27,39 @@ function ElServices() {
           <h2>{t("title")}</h2>
           <p>{t("description")}</p>
         </div>
+
         <div className="row">
-          {services?.map((service: any) => (
-            <div key={service?.id} className="col-lg-3 col-sm-6">
-              <div className="single-academics-card3">
-                <div className="icon">
-                  <i className={service?.icon}></i>
+          {services.length ? (
+            services?.map((service: any) => (
+              <div key={service?.id} className="col-lg-3 col-sm-6">
+                <div className="single-academics-card3">
+                  <div className="icon">
+                    <i className={service?.icon}></i>
+                  </div>
+                  <a href="#">
+                    <h3>{service?.title[lng]}</h3>
+                  </a>
+                  <a href="#" className="read-more-btn">
+                    {t("readMore")} <i className="flaticon-next"></i>
+                  </a>
                 </div>
-                <a href="#">
-                  <h3>{service?.title[lng]}</h3>
-                </a>
-                <a href="#" className="read-more-btn">
-                  {t("readMore")} <i className="flaticon-next"></i>
-                </a>
               </div>
+            ))
+          ) : (
+            <div
+              style={{
+                display: "flex",
+                gap: "7px",
+              }}
+            >
+              <Skeleton inline height={200} width={200} />
+              <Skeleton inline height={200} width={200} />
+              <Skeleton inline height={200} width={200} />
+              <Skeleton inline height={200} width={200} />
+              <Skeleton inline height={200} width={200} />
+              <Skeleton inline height={200} width={200} />
             </div>
-          ))}
+          )}
         </div>
       </div>
     </div>

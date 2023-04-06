@@ -7,6 +7,13 @@ export interface News {
   createdAt: any;
 }
 
+export interface NewsResponse {
+  data: News[];
+  totalDocs: number;
+  totalPages: number;
+  page: number;
+}
+
 export interface College {
   id: string;
   name: Translate;
