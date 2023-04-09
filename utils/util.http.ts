@@ -1,7 +1,7 @@
 import { CurrentPositionTypeEnum } from "@/types/models";
 
-//const baseUrl = "http://164.92.186.47:4000/api/";
-const baseUrl = "http://localhost:4000/api/";
+const baseUrl = "http://164.92.186.47:4000/api/";
+//const baseUrl = "http://localhost:4000/api/";
 export const uploadFileUrl = "http://164.92.186.47:4004/";
 // export const uploadFileUrl = "http://localhost:4004/";
 
