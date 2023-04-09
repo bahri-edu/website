@@ -1,103 +1,34 @@
 import AboutBanner from "@/components/AboutBanner";
-import { CouncilTypeEnum, Translate } from "@/types/models";
-import { httpClient } from "@/utils/util.http";
+import { Council } from "@/types/models";
+import { getCouncil } from "@/utils/mic.util";
+import { httpClient, uploadFileUrl } from "@/utils/util.http";
 import { useRouter } from "next/router";
 import React from "react";
-import { text } from "stream/consumers";
 
-interface DescriptionList {
-  title: Translate;
-  description: Translate;
-}
-interface CouncilDescription {
-  ar: string;
-  en: string;
-  lists?: DescriptionList[];
-}
-
-interface Council {
-  id: string;
-  title: Translate;
-  descriptions: CouncilDescription[];
-}
-
-//     id: "123456dsdsdsdsd",
-//     title: {
-//       ar: "التاريخ و الوصف",
-//       en: "التاريخ و الوصف",
-//     },
-//     descriptions: [
-//       {
-//         ar: "تم تشكيل أول مجلس للجامعة في عام 2012 وتم تمديد عضويته بأمر رئاسي في عام 2011 ، لتتماشى بشكل وثيق مع أحكام قانون جامعة بحري لعام 2011. المجلس هو الجهاز الأعلى للجامعة وهو المسؤول لوضع سياستها العامة وإشرافها وحسن أدائها.",
-//         en: "تم تشكيل أول مجلس للجامعة في عام 2012 وتم تمديد عضويته بأمر رئاسي في عام 2011 ، لتتماشى بشكل وثيق مع أحكام قانون جامعة بحري لعام 2011. المجلس هو الجهاز الأعلى للجامعة وهو المسؤول لوضع سياستها العامة وإشرافها وحسن أدائها.",
-//       },
-//       {
-//         ar: "وفقًا لأحكام القسم 3 (8) من قانون جامعة بحري لعام 2011 ، يضع المجلس القواعد التالية لتنظيم سير أعماله",
-//         en: "وفقًا لأحكام القسم 3 (8) من قانون جامعة بحري لعام 2011 ، يضع المجلس القواعد التالية لتنظيم سير أعماله",
-//       },
-//     ],
-//   },
-//   {
-//     id: "rhr5hr5h6rh5rhrhrh",
-//     title: {
-//       ar: "القواعد و النفاذ",
-//       en: "القواعد و النفاذ",
-//     },
-//     descriptions: [
-//       {
-//         ar: "يشار إلى هذه القواعد باسم النظام الداخلي لمجلس جامعة بحري وتدخل حيز التنفيذ بمجرد توقيعها من قبل رئيس المجلس.",
-//         en: "يشار إلى هذه القواعد باسم النظام الداخلي لمجلس جامعة بحري وتدخل حيز التنفيذ بمجرد توقيعها من قبل رئيس المجلس.",
-//       },
-//       {
-//         ar: "في هذه القواعد ، ما لم يقتض السياق معنى آخر ، يكون للكلمات التالية المعاني المخصصة لها فيما بعد على التوالي:",
-//         en: "في هذه القواعد ، ما لم يقتض السياق معنى آخر ، يكون للكلمات التالية المعاني المخصصة لها فيما بعد على التوالي:",
-//         lists: [
-//           {
-//             title: {
-//               ar: "القانون",
-//               en: "القانون",
-//             },
-//             description: {
-//               ar: "يقصد به قانون جامعة البحري 2011",
-//               en: "يقصد به قانون جامعة البحري 2011",
-//             },
-//           },
-//           {
-//             title: {
-//               ar: "الرئيس",
-//               en: "الرئيس",
-//             },
-//             description: {
-//               ar: "يقصد به رئيس مجلس جامعة البحري ، ويشمل أيضًا الشخص المنتخب من قبل المجلس وفقًا لهذه القواعد لرئاسة اجتماع له عند غياب الرئيس",
-//               en: "يقصد به رئيس مجلس جامعة البحري ، ويشمل أيضًا الشخص المنتخب من قبل المجلس وفقًا لهذه القواعد لرئاسة اجتماع له عند غياب الرئيس",
-//             },
-//           },
-//         ],
-//       },
-//     ],
-//   },
-// ];
-
-//
-
-export async function getServerSideProps() {
-  const councils = await httpClient(
-    `council?councilType=${CouncilTypeEnum.UNIVERSITYCOUNCIL}`
-  );
+export async function getServerSideProps(context: any) {
+  const { council } = context.params;
+  const councils = await httpClient(`council?councilType=${council}`);
   return {
     props: {
       councils,
+      council,
     },
   };
 }
-
-function UniversityCouncil({ councils }: { councils: Council[] }) {
+function Council({
+  councils,
+  council,
+}: {
+  councils: Council[];
+  council: string;
+}) {
+  const councilType = getCouncil(council);
   const { locale } = useRouter();
 
   const lng = locale === "ar" ? "ar" : "en";
   return (
     <>
-      <AboutBanner title={title[lng]} breadcrumbs={[title[lng]]} />
+      <AboutBanner title={councilType[lng]} breadcrumbs={[councilType[lng]]} />
 
       <div className="graduate-admission pt-100 pb-70">
         <div className="container">
@@ -133,7 +64,7 @@ function UniversityCouncil({ councils }: { councils: Council[] }) {
                       </div>
                     </nav>
                     <div className="tab-content" id="nav-tabContent">
-                      {councils.map(({ id, title, descriptions }, x) => (
+                      {councils.map(({ id, title, descriptions, image }, x) => (
                         <div
                           key={id}
                           className={`tab-pane fade ${
@@ -195,7 +126,12 @@ function UniversityCouncil({ councils }: { councils: Council[] }) {
                             </div>
                             <div className="col-xl-5">
                               <div className="img">
-                                <img src="/images/bah2.jpg" alt="Image" />
+                                {image && (
+                                  <img
+                                    src={uploadFileUrl + image}
+                                    alt="Image"
+                                  />
+                                )}
                               </div>
                             </div>
                           </div>
@@ -213,9 +149,4 @@ function UniversityCouncil({ councils }: { councils: Council[] }) {
   );
 }
 
-export default UniversityCouncil;
-
-const title = {
-  ar: "مجلس الجامعة",
-  en: "University Council",
-};
+export default Council;

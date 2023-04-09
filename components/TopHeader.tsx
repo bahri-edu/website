@@ -1,9 +1,14 @@
+import { DeanshipTypeEnum } from "@/types/models";
+import { getDeanship } from "@/utils/mic.util";
 import { ITranslate, useTranslate } from "@/utils/translate.util";
+import Link from "next/link";
 import { useRouter } from "next/router";
 import React from "react";
 
 function TopHeader() {
   const { locale } = useRouter();
+
+  const lng = locale === "ar" ? "ar" : "en";
 
   const t = useTranslate(translate, locale);
   return (
@@ -18,19 +23,43 @@ function TopHeader() {
                     <a href="#"> {t("deanship")}</a>
                     <ul className="dropdown-menu">
                       <li className="nav-item">
-                        <a href="#" className="nav-link">
-                          عمادة البحث العلمي
-                        </a>
+                        <Link
+                          href={`/deanship/${DeanshipTypeEnum.DEANSHIPOFSCIENTIFICRESEARCH}`}
+                        >
+                          <a className="nav-link">
+                            {
+                              getDeanship(
+                                DeanshipTypeEnum.DEANSHIPOFSCIENTIFICRESEARCH
+                              )[lng]
+                            }
+                          </a>
+                        </Link>
                       </li>
                       <li className="nav-item">
-                        <a href="#" className="nav-link">
-                          عمادة شؤون الطلاب
-                        </a>
+                        <Link
+                          href={`/deanship/${DeanshipTypeEnum.DEANSHIPOFSTUDENTAFFAIRS}`}
+                        >
+                          <a className="nav-link">
+                            {
+                              getDeanship(
+                                DeanshipTypeEnum.DEANSHIPOFSTUDENTAFFAIRS
+                              )[lng]
+                            }
+                          </a>
+                        </Link>
                       </li>
                       <li className="nav-item">
-                        <a href="#" className="nav-link">
-                          عمادة المكتبات
-                        </a>
+                        <Link
+                          href={`/deanship/${DeanshipTypeEnum.DEANSHIPOFLIBRARIES}`}
+                        >
+                          <a className="nav-link">
+                            {
+                              getDeanship(DeanshipTypeEnum.DEANSHIPOFLIBRARIES)[
+                                lng
+                              ]
+                            }
+                          </a>
+                        </Link>
                       </li>
                     </ul>
                   </li>

@@ -3,6 +3,12 @@ import Link from "next/link";
 import { useRouter } from "next/router";
 import React from "react";
 
+export enum CouncilTypeEnum {
+  UNIVERSITYCOUNCIL = "university-council",
+  DEANSCOUNCIL = "deans-council",
+  PROFESSORSCOUNCIL = "professors-council",
+}
+
 function UniversitItem({
   pathname,
   locale,
@@ -43,17 +49,26 @@ function UniversitItem({
           </Link>
         </li>
         <li className="nav-item">
-          <Link href="/university/university-council" className="nav-link">
+          <Link
+            href={`/university/councils/${CouncilTypeEnum.UNIVERSITYCOUNCIL}`}
+            className="nav-link"
+          >
             {t("univCouncil")}
           </Link>
         </li>
         <li className="nav-item">
-          <Link href="/university/the-deans-board" className="nav-link">
+          <Link
+            href={`/university/councils/${CouncilTypeEnum.DEANSCOUNCIL}`}
+            className="nav-link"
+          >
             {t("deansCouncil")}
           </Link>
         </li>
         <li className="nav-item">
-          <Link href="/university/the-senate" className="nav-link">
+          <Link
+            href={`/university/councils/${CouncilTypeEnum.PROFESSORSCOUNCIL}`}
+            className="nav-link"
+          >
             {t("profCouncil")}
           </Link>
         </li>

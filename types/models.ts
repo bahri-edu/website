@@ -165,3 +165,33 @@ export interface Logo {
   description: Translate;
   seqNo: number;
 }
+
+export interface DescriptionList {
+  title: Translate;
+  description: Translate;
+}
+export interface CouncilDescription {
+  ar: string;
+  en: string;
+  lists?: DescriptionList[];
+}
+
+export interface Council {
+  id: string;
+  title: Translate;
+  descriptions: CouncilDescription[];
+  councilType: CouncilTypeEnum;
+  image?: string;
+}
+
+export enum CouncilTypeEnum {
+  UNIVERSITYCOUNCIL = "university-council",
+  DEANSCOUNCIL = "deans-council",
+  PROFESSORSCOUNCIL = "professors-council",
+}
+
+export enum DeanshipTypeEnum {
+  DEANSHIPOFSCIENTIFICRESEARCH = "deanship-of-scientific-research",
+  DEANSHIPOFSTUDENTAFFAIRS = "deanship-of-student-affairs",
+  DEANSHIPOFLIBRARIES = "deanship-of-libraries",
+}
